@@ -1,0 +1,57 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn install
+
+PATH: 
+  /home/chaitya62/bin:/home/chaitya62/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin:/home/chaitya62/Android/Sdk/tools:/home/chaitya62/Android/Sdk/platform-tools
+
+Yarn version: 
+  0.24.5
+
+Node version: 
+  8.0.0
+
+Platform: 
+  linux x64
+
+npm manifest: 
+  {
+   "name": "stickypad",
+   "version": "1.0.0",
+   "description": "Simple Sticky Pad App",
+   "main": "index.js",
+   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+   },
+   "author": "Chaitya Shah",
+   "license": "ISC",
+   "devDependencies": {
+    "browserify": "*",
+    "flux": "*",
+    "gulp": "*",
+    "object-assign": "*",
+    "reactify": "*",
+    "vinyl-source-stream": "*",
+    "babel-core": "^6.25.0",
+    "babel-preset-es2015": "*",
+    "babelify": "*",
+    "babel-preset-react": "*"
+   },
+   "dependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "react-router-dom": "*"
+   }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  Error: https://registry.yarnpkg.com/browserify: ETIMEDOUT
+      at Timeout._onTimeout (/usr/local/lib/node_modules/yarn/node_modules/request/request.js:852:19)
+      at ontimeout (timers.js:488:11)
+      at tryOnTimeout (timers.js:323:5)
+      at Timer.listOnTimeout (timers.js:283:5)
