@@ -1,7 +1,20 @@
 import React,{Component} from 'react';
 import AppActions from '../../actions/AppActions';
 import AppStore from '../../stores/AppStore';
+import AppAPI from '../../utils/appAPI';
 import FeedList from './FeedList';
+
+function get_feeds(){
+	AppAPI.get_data("http://localhost/forum/test/test.json", null, 'GET').then(
+		function(data, err){
+		if(err) console.log("There was an error ");
+		var parsedData = JSON.parse(data);
+		AppActions.setFeeds(parsedData.feeds);
+		console.log("Hello, World!");
+	}
+	);
+}
+
 
 
 
@@ -9,13 +22,15 @@ import FeedList from './FeedList';
 class Feeds extends Component{
 	constructor(props) {
 		super(props);
+		get_feeds();
 		this.state = {
 			'feeds': AppStore.get('feeds'),
 		}
 	}
 	
 	render() {
-		console.log(this.props);
+		
+		console.log('refreshed here too');
 		return(
 			<div className="container-fluid">
 				<div className="row">

@@ -27,7 +27,7 @@ class App extends Component{
 	}
 	render() {
 		
-
+		console.log('refresh');
 		return(
 			<div>
 				<Navbar  />

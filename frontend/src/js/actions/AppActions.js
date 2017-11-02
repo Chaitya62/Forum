@@ -19,6 +19,13 @@ class AppActions{
 		 	id: id
 		});
 	}
+
+	static setFeeds(data){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.SET_FEEDS,
+			data: data
+		})
+	}
 	
 		
 }
