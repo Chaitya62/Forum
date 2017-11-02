@@ -2,7 +2,7 @@
 $db_params = array(
 	'servername' => 'localhost',
 	'username' => 'root',
-	'password' => 'root',
+	'password' => '',
 	'dbname' => 'forum'
 
 );
