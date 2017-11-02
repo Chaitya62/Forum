@@ -33,8 +33,8 @@ function main(){
 	$start = getArgumentStart($parameters);
 	if($start != -1){
 		$controller_name = $parameters[$start];
-		
-		 $function_name = $parameters[$start+1];
+
+		$function_name = $parameters[$start+1] . "_" . strtolower($_SERVER['REQUEST_METHOD']); 
 		$start+=2;
 		$args = array();
 		for(;$start < count($parameters); $start++){
