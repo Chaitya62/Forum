@@ -14,3 +14,16 @@ body{
 	border: 1px #ccc solid;
 	border-radius: 10px;
 }
+
+.login{
+	padding: 20px;
+	margin-top: 0px;
+	height: 100vh;
+	width: 100%;
+}
+
+.form{
+	padding: 40px;
+	background: rgba(120,132,154,0.3);
+	margin-top: 10%;
+}

@@ -5,7 +5,7 @@ require_once(__DIR__.'/database/CJ_Connection.php');
 class CJ_Model{
 
 	function __construct(){
-		echo 'CJ_Model class created <br>';
+		//echo 'CJ_Model class created <br>';
 		$db = new CJ_Connection();
 		$this->connection =  $db->getConnection();
 	}
@@ -27,7 +27,7 @@ class CJ_Model{
 		  $sql.=')';
 
 		  $sql=$this->appendSemicolon($sql);
-		echo $sql.'<br>';
+		//echo $sql.'<br>';
 
 	   $result = $this->connection->query($sql);
 		if($result)
@@ -62,7 +62,7 @@ class CJ_Model{
 		$sql= $this->where($sql,$whereArgs);	
 
 	   $sql=$this->appendSemicolon($sql);
-	   echo $sql.'<br>';
+	  // echo $sql.'<br>';
 		$finale=array();
 
 		$result = $this->connection->query($sql);
@@ -99,7 +99,7 @@ class CJ_Model{
 	   if($whereArgs)
 	   	$sql=$this->where($sql,$whereArgs);
 	   $sql=$this->appendSemicolon($sql);
-	   echo $sql.'<br>';
+	  // echo $sql.'<br>';
 	   $result = $this->connection->query($sql);
 
 		if($result)

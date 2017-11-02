@@ -5,14 +5,14 @@ require_once(__DIR__.'/../model/UserModel.php');
 class User{
 
 function __construct(){
-	echo 'user controller CLASS CREATED '."<br />";
+	//echo 'user controller CLASS CREATED '."<br />";
 	$this->model=new UserModel();
 
 }
 
 function login_post(){
 	$data = array();
-	print_r($_POST);
+	//print_r($_POST);
 	$data['username'] = $_POST['username'];
 	$data['password'] = $_POST['password'];
 	$result = $this->model->does_user_exist($data);
