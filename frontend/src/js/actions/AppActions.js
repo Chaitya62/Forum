@@ -26,6 +26,14 @@ class AppActions{
 			data: data
 		})
 	}
+
+	static login(data){
+		
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.USER_LOGIN,
+			data: true
+		})
+	}
 	
 		
 }

@@ -2,7 +2,14 @@ import React,{Component} from 'react';
 import AppActions from '../actions/AppActions';
 import AppStore from '../stores/AppStore';
 import AppAPI from '../utils/appAPI';
+import {Redirect} from 'react-router-dom';
 
+
+const getAppState = ()=>{
+	return{
+		'isLoggedIn': AppStore.get('isLoggedIn')
+	};
+}
 
 
 
@@ -10,9 +17,13 @@ import AppAPI from '../utils/appAPI';
 class Login extends Component{
 	constructor(props) {
 		super(props);
+		this.state = getAppState();
 	}
 	render() {
-		console.log(this.state);
+		if(this.state.isLoggedIn){
+			return <Redirect to="/" />
+		}
+
 		return(
 			<div className="login">
 			<div className="container">
@@ -45,7 +56,9 @@ class Login extends Component{
 		var self = this;
 		AppAPI.authenticate(username, password).then((data)=>{
 			if(data){
-				alert('Login Successfull');
+				AppActions.login(data);
+				this.setState({'isLoggedIn': AppStore.get('isLoggedIn')});
+				alert('Login Successful');
 			}else{
 				alert('Login Failed');
 			}
