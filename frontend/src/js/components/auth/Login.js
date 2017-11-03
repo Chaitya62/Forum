@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
-import AppActions from '../actions/AppActions';
-import AppStore from '../stores/AppStore';
-import AppAPI from '../utils/appAPI';
+import AppActions from '../../actions/AppActions';
+import AppStore from '../../stores/AppStore';
+import AppAPI from '../../utils/appAPI';
 import {Redirect} from 'react-router-dom';
 
 

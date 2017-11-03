@@ -33,7 +33,8 @@ module.exports = {
 		console.log(params);
 		var self = this;
 		function work(resolve, reject){
-			return self.get_data(AppConstants.LOGIN_URL, params , 'post', true).then((response)=>{
+			return self.get_data(AppConstants.LOGIN_URL, params , 'post', true).then((response)=>{			
+
 				var data = JSON.parse(response);
 				if(data.login=='failure'){
 					resolve(false);
@@ -44,6 +45,14 @@ module.exports = {
 		}
 
 		return new Promise(work);		
+	},
+
+	"createUser": function(username, password, email){
+		console.log("Creating user here.....");
+		function work(resolve, reject){
+			resolve(true);
+		}
+		return new Promise(work);
 	}
 
 

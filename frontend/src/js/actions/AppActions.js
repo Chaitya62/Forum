@@ -34,6 +34,20 @@ class AppActions{
 			data: true
 		})
 	}
+
+	static logout(){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.USER_LOGOUT,
+			data: false
+		})
+	}
+
+	static signup(data){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.USER_SIGNUP,
+			data: data
+		});
+	}
 	
 		
 }

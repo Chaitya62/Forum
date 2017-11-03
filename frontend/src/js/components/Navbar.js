@@ -7,12 +7,28 @@ import {NavLink} from 'react-router-dom';
 
 
 
+
 class Navbar extends Component{
 	constructor(props) {
 		super(props);
+		
 	}
 	render() {
+
+		var isLoggedIn = AppStore.get('isLoggedIn');
 		console.log(this.state);
+
+		var log,profile,signup;
+		if(isLoggedIn){
+			log = <NavLink className="nav-link" to="/logout"> Log Out </NavLink>
+			profile = <NavLink className="nav-link" to="/profile">My Profile</NavLink>
+		}else{
+			log = <NavLink className="nav-link" to="/login"> Log In </NavLink>
+			signup = <NavLink className="nav-link" to="/signup"> Signup </NavLink>
+			profile = null
+		}
+
+
 		return(
 			<div >
 				<nav className="navbar navbar-toggleable-md navbar-light bg-faded">
@@ -27,16 +43,21 @@ class Navbar extends Component{
 				        <NavLink className="nav-link" to="/home">Home <span className="sr-only">(current)</span></NavLink>
 				      </li>
 				      <li className="nav-item">
-				        <NavLink className="nav-link" to="/profile">My Profile</NavLink>
+				        { profile }
 				      </li>
 				   
 				    
 				    </ul>
 
 				    <div className="navbar-left my-2 my-lg-0">
-				    	<NavLink className="nav-link" to="/login">
-				    		Log In
-				    	</NavLink>
+				    	{
+				    		log
+				    	}
+				    </div>
+				    <div className="navbar-left my-2 my-lg-0">
+				    	{
+				    		signup
+				    	}
 				    </div>
 
 				   

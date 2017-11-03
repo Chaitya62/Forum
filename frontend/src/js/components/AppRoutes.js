@@ -4,8 +4,9 @@ import AppStore from '../stores/AppStore';
 import {Route} from 'react-router-dom';
 import Feeds from './Feeds/Feeds';
 import Question from './Questions/Question';
-import Login from './Login';
-
+import Login from './auth/Login';
+import Logout from './auth/Logout';
+import Signup from './auth/Signup';
 
 class AppRoutes extends Component {
 
@@ -20,6 +21,8 @@ class AppRoutes extends Component {
       <Route exact path='/' component={Feeds} /> 
       <Route  path='/questions' component={Question}/>
       <Route path='/login' component = {Login} />
+      <Route path='/logout' component = {Logout} />
+      <Route path='/signup' component = {Signup} />
     </div>
   );
   }

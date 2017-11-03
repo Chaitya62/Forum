@@ -75,11 +75,11 @@ AppDispatcher.register((payload)=>{
 
 
 		case AppConstants.USER_LOGIN:
-			console.log("it was here");
 			AppStore.change('isLoggedIn', action.data);
-			console.log(_store['isLoggedIn']);
+			break;
 
-			AppStore.emit(CHANGE_EVENT);
+		case AppConstants.USER_LOGOUT:
+			AppStore.change('isLoggedIn', action.data);
 			break;
 		/*
 	

@@ -25,14 +25,14 @@ body{
 .form{
 	padding: 40px;
 	background: rgba(120,132,154,0.3);
-	margin-top: 10%;
+	margin-top: 5%;
 }
 
 
 /* loader animation */
 
 #loading {
-    background: #f4f4f2 url("img/page-bg.png") repeat scroll 0 0;
+    background: #f4f4f2  repeat scroll 0 0;
     height: 100%;
     left: 0;
     margin: auto;
@@ -133,4 +133,10 @@ body{
 
 }
 
+
+
+
+.alert{
+    text-align: left !important;
+}
 /* loader animation ends here */
