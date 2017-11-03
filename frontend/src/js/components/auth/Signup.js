@@ -112,12 +112,13 @@ class Signup extends Component{
 
 		var self = this;
 		AppAPI.createUser(username, password, email).then((data)=>{
-			if(data){
-				console.log(data);
-				AppActions.signup(data);
-				this.setState({'isSignedUp': data});
+			var success = data.success;
+			if(success){
+				//console.log(data);
+				AppActions.signup(success);
+				this.setState({'isSignedUp': success});
 			}else{
-				alert('Signup Failed');
+				this.setState({'message': data.message});
 			}
 		})
 		

@@ -13,13 +13,13 @@ class CJ_Model{
 	
 	function create($tableName,$insertWhat){
 
-		$sql='INSERT INTO '.$tableName.'(';
+		$sql='INSERT INTO '.$tableName.' (';
 		foreach ($insertWhat as $key => $value)
 			$sql .= $key.',';
 		
 		  $sql=rtrim($sql,',');
 		  $sql.=')';
-		$sql.=' VALUES(';
+		$sql.=' VALUES (';
 		
 		foreach ($insertWhat as $key => $value)
 			$sql .= '\''.$value.'\',';
@@ -28,9 +28,10 @@ class CJ_Model{
 		  $sql.=')';
 
 		  $sql=$this->appendSemicolon($sql);
-		//echo $sql.'<br>';
+//		echo $sql.'<br>';
 
 	   $result = $this->connection->query($sql);
+
 		if($result)
 			return $result;
 		else
@@ -38,6 +39,7 @@ class CJ_Model{
 	}
 
 	/*
+
 		****tablename necessary !
 		$tableName => 'users'
 		

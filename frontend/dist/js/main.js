@@ -26323,12 +26323,13 @@ var Signup = function (_Component) {
 
 			var self = this;
 			_appAPI2.default.createUser(username, password, email).then(function (data) {
-				if (data) {
-					console.log(data);
-					_AppActions2.default.signup(data);
-					_this2.setState({ 'isSignedUp': data });
+				var success = data.success;
+				if (success) {
+					//console.log(data);
+					_AppActions2.default.signup(success);
+					_this2.setState({ 'isSignedUp': success });
 				} else {
-					alert('Signup Failed');
+					_this2.setState({ 'message': data.message });
 				}
 			});
 		}
@@ -26357,7 +26358,8 @@ exports.default = {
 	LOGIN_URL: 'http://localhost/forum/index.php/User/login',
 	'USER_LOGIN': 'USER_LOGIN',
 	'USER_LOGOUT': 'USER_LOGOUT',
-	'USER_SIGNUP': 'USER_SIGNUP'
+	'USER_SIGNUP': 'USER_SIGNUP',
+	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register'
 };
 
 },{}],240:[function(require,module,exports){
@@ -26604,9 +26606,9 @@ module.exports = {
 
 	"authenticate": function authenticate(username, password) {
 
-		console.log(username);
+		//console.log(username);
 		var params = "username=" + username.value + "&password=" + password.value;
-		console.log(params);
+		//console.log(params);
 		var self = this;
 		function work(resolve, reject) {
 			return self.get_data(_AppConstants2.default.LOGIN_URL, params, 'post', true).then(function (response) {
@@ -26623,9 +26625,18 @@ module.exports = {
 	},
 
 	"createUser": function createUser(username, password, email) {
+		var params = "username=" + username.value + "&password=" + password.value + "&email=" + email.value;
+
 		console.log("Creating user here.....");
+		var self = this;
 		function work(resolve, reject) {
-			resolve(true);
+			return self.get_data(_AppConstants2.default.SIGNUP_URL, params, 'post', true).then(function (response) {
+				console.log(response);
+				var data = JSON.parse(response);
+				console.log(data.message);
+				data['success'] = data.register !== 'failure';
+				resolve(data);
+			}).catch(reject);
 		}
 		return new Promise(work);
 	}

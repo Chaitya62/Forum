@@ -24,8 +24,9 @@ class UserModel extends CJ_Model{
 
 		return $this->read('users', array('*'), array('id'=>$id));
 	}
-	function insert($data){
-		$this->create('users',$data);
+	function add_user($data){
+		$result = $this->create('users',$data);
+		//echo $result;
 	}
 	
 }

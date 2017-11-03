@@ -28,9 +28,9 @@ module.exports = {
 
 	"authenticate" : function(username, password){
 		
-		console.log(username);
+		//console.log(username);
 		var params = "username="+username.value+"&password="+password.value;
-		console.log(params);
+		//console.log(params);
 		var self = this;
 		function work(resolve, reject){
 			return self.get_data(AppConstants.LOGIN_URL, params , 'post', true).then((response)=>{			
@@ -47,9 +47,21 @@ module.exports = {
 	},
 
 	"createUser": function(username, password, email){
+		var params =  "username="+username.value
+					 +"&password="+password.value
+					 +"&email="+email.value;
+	
+
 		console.log("Creating user here.....");
+		var self = this;
 		function work(resolve, reject){
-			resolve(true);
+			return self.get_data(AppConstants.SIGNUP_URL, params, 'post', true).then((response)=>{
+				console.log(response);
+				var data = JSON.parse(response);
+				console.log(data.message);
+				data['success'] = (data.register !== 'failure');
+				resolve(data);
+			}).catch(reject);
 		}
 		return new Promise(work);
 	}

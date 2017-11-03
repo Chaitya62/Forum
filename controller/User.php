@@ -39,14 +39,15 @@ function login_post(){
 
 
 			if(count($r1) > 0)
-			$response['message'] = 'user already exist';
+			$response['message'] = 'username already exist';
 			if(count($r2) > 0)
 			$response['message'] += 'email already exist';
 		}
 		else {
 			$data['password'] = md5($_POST['password']);
-			$this->model->insert($data);
+			$this->model->add_user($data);
 			$response['register'] = 'success';
+			$response['message'] = '';
 		}
 		    echo json_encode($response);
  }

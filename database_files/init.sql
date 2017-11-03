@@ -12,7 +12,7 @@ CREATE TABLE `users` (
  `username` varchar(255) NOT NULL,
  `email` varchar(255) NOT NULL,
  `password` text NOT NULL,
- `upvotes` int(11) NOT NULL,
+ `upvotes` int(11) NOT NULL DEFAULT 0,
  PRIMARY KEY (`id`)
 );
 
