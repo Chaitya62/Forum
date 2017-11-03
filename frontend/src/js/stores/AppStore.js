@@ -10,44 +10,8 @@ let _store ={
 	'test': 'stuff',
 	'questionId': '',
 	'inQuestion': false,
-	'feeds': [
-		{
-			"question": "What is this ? ",
-			"user": "Chaitya Shah",
-			"likes": "102",
-			"upvotes": "10",
-			"views": "12",
-			"answers": "2",
-			"summary": "Hello, World  ipLorem ipsum dolor sit amet, consectetur adipisicing elit. Error id officiis culpa, molestiae, molestias rerum totam esse tenetur. Illo dolorum consectetur, aliquid alias fugiat quidem quae possimus ad perferendis culpa."
-		},
-		{
-			"question": "What is this ? ",
-			"user": "Chaitya Shah",
-			"likes": "102",
-			"upvotes": "10",
-			"views": "12",
-			"answers": "2",
-			"summary": "Hello, World  ipLorem ipsum dolor sit amet, consectetur adipisicing elit. Error id officiis culpa, molestiae, molestias rerum totam esse tenetur. Illo dolorum consectetur, aliquid alias fugiat quidem quae possimus ad perferendis culpa."
-		},
-		{
-			"question": "What is this ? ",
-			"user": "Chaitya Shah",
-			"likes": "102",
-			"upvotes": "10",
-			"views": "12",
-			"answers": "2",
-			"summary": "Hello, World  ipLorem ipsum dolor sit amet, consectetur adipisicing elit. Error id officiis culpa, molestiae, molestias rerum totam esse tenetur. Illo dolorum consectetur, aliquid alias fugiat quidem quae possimus ad perferendis culpa."
-		},
-		{
-			"question": "What is this ? ",
-			"user": "Chaitya Shah",
-			"likes": "102",
-			"upvotes": "10",
-			"views": "12",
-			"answers": "2",
-			"summary": "Hello, World  ipLorem ipsum dolor sit amet, consectetur adipisicing elit. Error id officiis culpa, molestiae, molestias rerum totam esse tenetur. Illo dolorum consectetur, aliquid alias fugiat quidem quae possimus ad perferendis culpa."
-		},
-		],
+	'isLoggedIn': false,
+	'feeds': [],
 };
 
 class AppStoreClass extends EventEmitter{
@@ -107,6 +71,15 @@ AppDispatcher.register((payload)=>{
 			AppStore.change('feeds',action.data);
 			console.log("here");
 			console.log(action.data);
+			break;
+
+
+		case AppConstants.USER_LOGIN:
+			console.log("it was here");
+			AppStore.change('isLoggedIn', action.data);
+			console.log(_store['isLoggedIn']);
+
+			AppStore.emit(CHANGE_EVENT);
 			break;
 		/*
 	

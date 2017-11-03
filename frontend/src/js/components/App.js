@@ -10,6 +10,7 @@ const getAppState = ()=>{
 	return{
 		feeds: AppStore.get('feeds'),
 		inQuestion: AppStore.get('inQuestion'),
+		'isLoggedIn': AppStore.get('isLoggedIn')
 	};
 }
 
@@ -26,7 +27,7 @@ class App extends Component{
 		AppStore.removeChangeListener(this._onChange.bind(this));
 	}
 	render() {
-		
+		console.log(this.state);
 		console.log('refresh');
 		return(
 			<div>

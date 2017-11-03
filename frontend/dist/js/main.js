@@ -25199,6 +25199,15 @@ var AppActions = function () {
 				data: data
 			});
 		}
+	}, {
+		key: 'login',
+		value: function login(data) {
+
+			_AppDispatcher2.default.handleViewAction({
+				actionType: _AppConstants2.default.USER_LOGIN,
+				data: true
+			});
+		}
 	}]);
 
 	return AppActions;
@@ -25206,7 +25215,7 @@ var AppActions = function () {
 
 exports.default = AppActions;
 
-},{"../constants/AppConstants":236,"../dispatcher/AppDispatcher":237}],228:[function(require,module,exports){
+},{"../constants/AppConstants":237,"../dispatcher/AppDispatcher":238}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25250,7 +25259,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var getAppState = function getAppState() {
 	return {
 		feeds: _AppStore2.default.get('feeds'),
-		inQuestion: _AppStore2.default.get('inQuestion')
+		inQuestion: _AppStore2.default.get('inQuestion'),
+		'isLoggedIn': _AppStore2.default.get('isLoggedIn')
 	};
 };
 
@@ -25279,7 +25289,7 @@ var App = function (_Component) {
 	}, {
 		key: 'render',
 		value: function render() {
-
+			console.log(this.state);
 			console.log('refresh');
 			return _react2.default.createElement(
 				'div',
@@ -25300,7 +25310,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../actions/AppActions":227,"../stores/AppStore":239,"./AppRoutes":229,"./Navbar":234,"react":223,"react-router-dom":186}],229:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":240,"./AppRoutes":229,"./Navbar":235,"react":223,"react-router-dom":186}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25371,7 +25381,7 @@ var AppRoutes = function (_Component) {
 
 exports.default = AppRoutes;
 
-},{"../actions/AppActions":227,"../stores/AppStore":239,"./Feeds/Feeds":232,"./Login":233,"./Questions/Question":235,"react":223,"react-router-dom":186}],230:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":240,"./Feeds/Feeds":232,"./Login":234,"./Questions/Question":236,"react":223,"react-router-dom":186}],230:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25468,7 +25478,7 @@ var Feed = function (_Component) {
 
 exports.default = Feed;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":239,"react":223,"react-router-dom":186}],231:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":240,"react":223,"react-router-dom":186}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25535,7 +25545,7 @@ var FeedList = function (_Component) {
 
 exports.default = FeedList;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":239,"./Feed":230,"react":223}],232:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":240,"./Feed":230,"react":223}],232:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25566,6 +25576,10 @@ var _FeedList = require('./FeedList');
 
 var _FeedList2 = _interopRequireDefault(_FeedList);
 
+var _Loader = require('../Loader.js');
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25575,7 +25589,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function get_feeds() {
-	_appAPI2.default.get_data("http://localhost/forum/test/test.json", null, 'GET').then(function (data, err) {
+	return _appAPI2.default.get_data("http://localhost/forum/test/test.json", null, 'GET').then(function (data, err) {
 		if (err) console.log("There was an error ");
 		var parsedData = JSON.parse(data);
 		_AppActions2.default.setFeeds(parsedData.feeds);
@@ -25591,8 +25605,16 @@ var Feeds = function (_Component) {
 
 		var _this = _possibleConstructorReturn(this, (Feeds.__proto__ || Object.getPrototypeOf(Feeds)).call(this, props));
 
-		get_feeds();
+		var self = _this;
+		// delay on purpose remove later
+		setTimeout(function () {
+			get_feeds().then(function () {
+
+				self.setState({ 'feeds': _AppStore2.default.get('feeds'), 'isLoading': false });
+			});
+		}, 1000);
 		_this.state = {
+			'isLoading': true,
 			'feeds': _AppStore2.default.get('feeds')
 		};
 		return _this;
@@ -25603,6 +25625,14 @@ var Feeds = function (_Component) {
 		value: function render() {
 
 			console.log('refreshed here too');
+			if (this.state.isLoading) {
+				return _react2.default.createElement(
+					'div',
+					{ className: 'loader' },
+					_react2.default.createElement(_Loader2.default, null)
+				);
+			}
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'container-fluid' },
@@ -25635,7 +25665,68 @@ var Feeds = function (_Component) {
 
 exports.default = Feeds;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":239,"../../utils/appAPI":240,"./FeedList":231,"react":223}],233:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":240,"../../utils/appAPI":241,"../Loader.js":233,"./FeedList":231,"react":223}],233:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Loader = function (_Component) {
+	_inherits(Loader, _Component);
+
+	function Loader(props) {
+		_classCallCheck(this, Loader);
+
+		return _possibleConstructorReturn(this, (Loader.__proto__ || Object.getPrototypeOf(Loader)).call(this, props));
+	}
+
+	_createClass(Loader, [{
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement(
+				"div",
+				{ className: "row" },
+				_react2.default.createElement(
+					"div",
+					{ id: "loading" },
+					_react2.default.createElement(
+						"ul",
+						{ className: "bokeh" },
+						_react2.default.createElement("li", null),
+						_react2.default.createElement("li", null),
+						_react2.default.createElement("li", null)
+					)
+				)
+			);
+		}
+	}, {
+		key: "_onChange",
+		value: function _onChange() {
+			this.setState(getAppState());
+		}
+	}]);
+
+	return Loader;
+}(_react.Component);
+
+exports.default = Loader;
+
+},{"react":223}],234:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25660,6 +25751,8 @@ var _appAPI = require('../utils/appAPI');
 
 var _appAPI2 = _interopRequireDefault(_appAPI);
 
+var _reactRouterDom = require('react-router-dom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25668,19 +25761,31 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var getAppState = function getAppState() {
+	return {
+		'isLoggedIn': _AppStore2.default.get('isLoggedIn')
+	};
+};
+
 var Login = function (_Component) {
 	_inherits(Login, _Component);
 
 	function Login(props) {
 		_classCallCheck(this, Login);
 
-		return _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this, props));
+
+		_this.state = getAppState();
+		return _this;
 	}
 
 	_createClass(Login, [{
 		key: 'render',
 		value: function render() {
-			console.log(this.state);
+			if (this.state.isLoggedIn) {
+				return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/' });
+			}
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'login' },
@@ -25721,13 +25826,17 @@ var Login = function (_Component) {
 	}, {
 		key: 'onClickHandler',
 		value: function onClickHandler(e) {
+			var _this2 = this;
+
 			e.preventDefault();
 			var username = this.refs.username;
 			var password = this.refs.password;
 			var self = this;
 			_appAPI2.default.authenticate(username, password).then(function (data) {
 				if (data) {
-					alert('Login Successfull');
+					_AppActions2.default.login(data);
+					_this2.setState({ 'isLoggedIn': _AppStore2.default.get('isLoggedIn') });
+					alert('Login Successful');
 				} else {
 					alert('Login Failed');
 				}
@@ -25745,7 +25854,7 @@ var Login = function (_Component) {
 
 exports.default = Login;
 
-},{"../actions/AppActions":227,"../stores/AppStore":239,"../utils/appAPI":240,"react":223}],234:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":240,"../utils/appAPI":241,"react":223,"react-router-dom":186}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25860,7 +25969,7 @@ var Navbar = function (_Component) {
 
 exports.default = Navbar;
 
-},{"../actions/AppActions":227,"../stores/AppStore":239,"react":223,"react-router-dom":186}],235:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":240,"react":223,"react-router-dom":186}],236:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25915,7 +26024,7 @@ var Question = function (_Component) {
 
 exports.default = Question;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":239,"react":223}],236:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":240,"react":223}],237:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25925,10 +26034,11 @@ exports.default = {
 	TESTING: "TESTING",
 	VIEW_QUESTION: "VIEW_QUESTION",
 	SET_FEEDS: 'SET_FEEDS',
-	LOGIN_URL: 'http://localhost/forum/index.php/User/login'
+	LOGIN_URL: 'http://localhost/forum/index.php/User/login',
+	'USER_LOGIN': 'USER_LOGIN'
 };
 
-},{}],237:[function(require,module,exports){
+},{}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25973,7 +26083,7 @@ var appDispatcher = new AppDispatcher();
 
 exports.default = appDispatcher;
 
-},{"flux":26}],238:[function(require,module,exports){
+},{"flux":26}],239:[function(require,module,exports){
 'use strict';
 
 var _App = require('./components/App');
@@ -26002,7 +26112,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_App2.default, null)
 ), document.getElementById('app'));
 
-},{"./components/App":228,"./utils/appAPI":240,"react":223,"react-dom":48,"react-router-dom":186}],239:[function(require,module,exports){
+},{"./components/App":228,"./utils/appAPI":241,"react":223,"react-dom":48,"react-router-dom":186}],240:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26039,39 +26149,8 @@ var _store = {
 	'test': 'stuff',
 	'questionId': '',
 	'inQuestion': false,
-	'feeds': [{
-		"question": "What is this ? ",
-		"user": "Chaitya Shah",
-		"likes": "102",
-		"upvotes": "10",
-		"views": "12",
-		"answers": "2",
-		"summary": "Hello, World  ipLorem ipsum dolor sit amet, consectetur adipisicing elit. Error id officiis culpa, molestiae, molestias rerum totam esse tenetur. Illo dolorum consectetur, aliquid alias fugiat quidem quae possimus ad perferendis culpa."
-	}, {
-		"question": "What is this ? ",
-		"user": "Chaitya Shah",
-		"likes": "102",
-		"upvotes": "10",
-		"views": "12",
-		"answers": "2",
-		"summary": "Hello, World  ipLorem ipsum dolor sit amet, consectetur adipisicing elit. Error id officiis culpa, molestiae, molestias rerum totam esse tenetur. Illo dolorum consectetur, aliquid alias fugiat quidem quae possimus ad perferendis culpa."
-	}, {
-		"question": "What is this ? ",
-		"user": "Chaitya Shah",
-		"likes": "102",
-		"upvotes": "10",
-		"views": "12",
-		"answers": "2",
-		"summary": "Hello, World  ipLorem ipsum dolor sit amet, consectetur adipisicing elit. Error id officiis culpa, molestiae, molestias rerum totam esse tenetur. Illo dolorum consectetur, aliquid alias fugiat quidem quae possimus ad perferendis culpa."
-	}, {
-		"question": "What is this ? ",
-		"user": "Chaitya Shah",
-		"likes": "102",
-		"upvotes": "10",
-		"views": "12",
-		"answers": "2",
-		"summary": "Hello, World  ipLorem ipsum dolor sit amet, consectetur adipisicing elit. Error id officiis culpa, molestiae, molestias rerum totam esse tenetur. Illo dolorum consectetur, aliquid alias fugiat quidem quae possimus ad perferendis culpa."
-	}]
+	'isLoggedIn': false,
+	'feeds': []
 };
 
 var AppStoreClass = function (_EventEmitter) {
@@ -26148,6 +26227,14 @@ _AppDispatcher2.default.register(function (payload) {
 			console.log("here");
 			console.log(action.data);
 			break;
+
+		case _AppConstants2.default.USER_LOGIN:
+			console.log("it was here");
+			AppStore.change('isLoggedIn', action.data);
+			console.log(_store['isLoggedIn']);
+
+			AppStore.emit(CHANGE_EVENT);
+			break;
 		/*
   		Handle all the actions here
   		*/
@@ -26159,7 +26246,7 @@ _AppDispatcher2.default.register(function (payload) {
 
 exports.default = AppStore;
 
-},{"../constants/AppConstants":236,"../dispatcher/AppDispatcher":237,"../utils/appAPI":240,"events":2}],240:[function(require,module,exports){
+},{"../constants/AppConstants":237,"../dispatcher/AppDispatcher":238,"../utils/appAPI":241,"events":2}],241:[function(require,module,exports){
 'use strict';
 
 var _AppConstants = require('../constants/AppConstants');
@@ -26215,4 +26302,4 @@ module.exports = {
 
 };
 
-},{"../actions/AppActions":227,"../constants/AppConstants":236}]},{},[238]);
+},{"../actions/AppActions":227,"../constants/AppConstants":237}]},{},[239]);
