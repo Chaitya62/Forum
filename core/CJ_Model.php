@@ -1,4 +1,5 @@
 <?php
+// Author @jigar_wala
 
 require_once(__DIR__.'/database/CJ_Connection.php');
 //do not return anything if on error // now returning ERROR at blah blah

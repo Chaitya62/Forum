@@ -26610,7 +26610,6 @@ module.exports = {
 		var self = this;
 		function work(resolve, reject) {
 			return self.get_data(_AppConstants2.default.LOGIN_URL, params, 'post', true).then(function (response) {
-
 				var data = JSON.parse(response);
 				if (data.login == 'failure') {
 					resolve(false);

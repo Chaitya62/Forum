@@ -14,7 +14,7 @@ function login_post(){
 	$data = array();
 	//print_r($_POST);
 	$data['username'] = $_POST['username'];
-	$data['password'] = $_POST['password'];
+	$data['password'] = md5($_POST['password']);
 	$result = $this->model->does_user_exist($data);
 	if(count($result) > 0){
 			$response['login'] = 'success';
@@ -25,21 +25,32 @@ function login_post(){
 	echo json_encode($response);
 	
  }
-
-function login_get(){
-		
+ function register_post(){
 		$data = array();
-		$data['username'] = 'chaitya62';
-		$data['password'] = 'rehregr5b656bdtybr6ybetr7b6y';
 		$response = array();
-		$result = $this->model->does_user_exist($data);
-		if(count($result) > 0){
-			$response['login'] = 'success';
-		}else{
-			$response['login'] = 'failure';
+		$data['username'] = $_POST['username'];
+		$r1 = $this->model->does_user_exist($data);
+		$data['email'] = $_POST['email'];
+		$r2 = $this->model->does_user_exist(array('email'=>$data['email']));
+
+		if(count($r1) > 0 || count($r2) > 0){
+			$response['register'] = 'failure';
+			$response['message']='';
+
+
+			if(count($r1) > 0)
+			$response['message'] = 'user already exist';
+			if(count($r2) > 0)
+			$response['message'] += 'email already exist';
 		}
-		echo json_encode($response);
-}
+		else {
+			$data['password'] = md5($_POST['password']);
+			$this->model->insert($data);
+			$response['register'] = 'success';
+		}
+		    echo json_encode($response);
+ }
+
 
 function hello_get(){
 	echo "Hello, World!";
@@ -49,7 +60,6 @@ function hello_get(){
 //http://localhost/CJ-MVC/index.php/User/getAll/
 function getAll_get(){
 	$result = $this->model->get_all();
-	print_r($result);
 	echo json_encode($result);
 }
 
