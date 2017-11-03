@@ -101,6 +101,13 @@ AppDispatcher.register((payload)=>{
 			AppStore.change('questionId', action.id);
 			AppStore.change('inQuestion', true);
 			break;
+
+
+		case AppConstants.SET_FEEDS:
+			AppStore.change('feeds',action.data);
+			console.log("here");
+			console.log(action.data);
+			break;
 		/*
 	
 		Handle all the actions here
