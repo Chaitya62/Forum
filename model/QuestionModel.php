@@ -16,6 +16,5 @@ class UserModel extends CJ_Model{
 
 		return $this->read('users', array('*'), array('id'=>$id));
 	}
-	
 }
  ?>
