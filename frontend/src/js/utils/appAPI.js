@@ -34,6 +34,7 @@ module.exports = {
 		var self = this;
 		function work(resolve, reject){
 			return self.get_data(AppConstants.LOGIN_URL, params , 'post', true).then((response)=>{
+				console.log(response);
 				var data = JSON.parse(response);
 				if(data.login=='failure'){
 					resolve(false);
