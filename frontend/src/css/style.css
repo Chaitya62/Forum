@@ -139,4 +139,9 @@ body{
 .alert{
     text-align: left !important;
 }
+
+
+.ask div{
+    padding: 10px;
+}
 /* loader animation ends here */

@@ -4,8 +4,61 @@ var AppActions = require('../actions/AppActions');
 
 
 module.exports = {
-	
 
+
+	"cache_to_browser":function(key, value){
+		function work(resolve, reject){
+			if(typeof value != 'string'){
+			value = JSON.stringify(value);
+		}
+			localStorage.setItem(key, value);
+			resolve(true);
+		}
+
+		return new Promise(work);
+	},
+	"get_from_cache": function(key){
+
+		function work(resolve, reject){
+			var value = localStorage.getItem(key);
+			resolve(value);
+		}
+		return new Promise(work);
+		//will have to parse if not string 
+		
+	},
+	"destroy_cache": function(){
+		localStorage.removeItem(AppConstants.STORE);
+		return;
+	}
+	,
+	"cache_store":function(store){
+		return this.cache_to_browser(AppConstants.STORE, store);
+	},
+	"get_store":function(){
+
+		var self = this;
+		function work(resolve, reject){
+			self.get_from_cache(AppConstants.STORE).then((value)=>{
+				console.log('value: ',value);
+				value = JSON.parse(value);
+				if(value){
+					resolve(value); 
+				}else{
+					console.log('here asdf');
+					resolve({
+						'test': 'stuff',
+						'questionId': '',
+						'inQuestion': false,
+						'isLoggedIn': false,
+						'user_id': null,
+						'feeds': [],
+					});
+				}
+			});
+		}
+		return new Promise(work);
+	},
 	 "get_data" : function(url, params, protocol, isForm=false){
 
 	 	function work(resolve, reject){
@@ -34,11 +87,12 @@ module.exports = {
 		var self = this;
 		function work(resolve, reject){
 			return self.get_data(AppConstants.LOGIN_URL, params , 'post', true).then((response)=>{			
+				console.log(response);
 				var data = JSON.parse(response);
 				if(data.login=='failure'){
 					resolve(false);
 				}else{
-					resolve(true);
+					resolve(data);
 				}
 			}).catch(reject);
 		}
@@ -69,6 +123,25 @@ module.exports = {
 		var data = localStorage.getItem('forumStore');
 		data = JSON.parse(data);
 		
+	},
+	"ask": function(qHeader, qDescription, user_id){
+		var params = "question_header="+qHeader.value
+					+"&description="+qDescription.value
+					+"&user_id="+user_id;
+
+
+		var self = this;
+		console.log('asking....');
+		function work(resolve, reject){
+			return self.get_data(AppConstants.ASK_URL, params, 'post', true).then((response)=>{
+				console.log(response);
+				var data = JSON.parse(response);
+				resolve(data);
+
+			}).catch(reject);
+		}
+
+		return new Promise(work);
 	}
 
 
