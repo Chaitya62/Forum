@@ -7,6 +7,7 @@ ini_set('display_errors', 'On'); */
 // include all controllers here
 // require('./controller/Test.php');
 require('./controller/User.php');
+require('./controller/Question.php');
 
 
 // call the controllers using 
