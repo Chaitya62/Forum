@@ -19,8 +19,9 @@ CREATE TABLE `users` (
 CREATE TABLE `questions` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `user_id` int(11) DEFAULT NULL,
- `what` text,
- `kabhi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ `description` text,
+ `question_header` text,
+ `asked_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`),
  KEY `user_id` (`user_id`),
  CONSTRAINT `questions_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
@@ -30,9 +31,9 @@ CREATE TABLE `answers` (
  `id` int(11) NOT NULL AUTO_INCREMENT,
  `user_id` int(11) DEFAULT NULL,
  `question_id` int(11) DEFAULT NULL,
- `what` text,
+ `answer` text,
  `upvotes` int(11) DEFAULT NULL,
- `kabhi` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ `answered_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`),
  KEY `question_id` (`question_id`),
  KEY `user_id` (`user_id`),
@@ -53,8 +54,8 @@ CREATE TABLE `upvote_audit` (
 -- users
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `upvotes`) VALUES
-(1, 'jigar_wala', 'jigar.wala@forum.xyz', 'ne uh4ihncorn43uc8reucmjrnf84c8hr48m8rhjmshcnrs', 15),
-(2, 'chaitya62', 'chaitya.shah@forum.xyz', 'rehregr5b656bdtybr6ybetr7b6y', 100);
+(1, 'jigar_wala', 'jigar.wala@forum.xyz', 'jwala', 15),
+(2, 'chaitya62', 'chaitya.shah@forum.xyz', 'testing123', 100);
 
 -- quesions
 

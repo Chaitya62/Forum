@@ -7,4 +7,5 @@ export default  {
 	'USER_LOGOUT': 'USER_LOGOUT',
 	'USER_SIGNUP' : 'USER_SIGNUP',
 	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register',
+	'LOCAL_DATA': 'LOCAL_DATA'
 }
