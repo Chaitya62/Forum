@@ -64,6 +64,11 @@ module.exports = {
 			}).catch(reject);
 		}
 		return new Promise(work);
+	},
+	"loadData": function(){
+		var data = localStorage.getItem('forumStore');
+		data = JSON.parse(data);
+		
 	}
 
 

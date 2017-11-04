@@ -26359,7 +26359,8 @@ exports.default = {
 	'USER_LOGIN': 'USER_LOGIN',
 	'USER_LOGOUT': 'USER_LOGOUT',
 	'USER_SIGNUP': 'USER_SIGNUP',
-	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register'
+	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register',
+	'LOCAL_DATA': 'LOCAL_DATA'
 };
 
 },{}],240:[function(require,module,exports){
@@ -26422,6 +26423,10 @@ var _reactDom = require('react-dom');
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
+var _AppActions = require('./actions/AppActions');
+
+var _AppActions2 = _interopRequireDefault(_AppActions);
+
 var _appAPI = require('./utils/appAPI');
 
 var _appAPI2 = _interopRequireDefault(_appAPI);
@@ -26436,7 +26441,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _react2.default.createElement(_App2.default, null)
 ), document.getElementById('app'));
 
-},{"./components/App":228,"./utils/appAPI":243,"react":223,"react-dom":48,"react-router-dom":186}],242:[function(require,module,exports){
+},{"./actions/AppActions":227,"./components/App":228,"./utils/appAPI":243,"react":223,"react-dom":48,"react-router-dom":186}],242:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26639,6 +26644,10 @@ module.exports = {
 			}).catch(reject);
 		}
 		return new Promise(work);
+	},
+	"loadData": function loadData() {
+		var data = localStorage.getItem('forumStore');
+		data = JSON.parse(data);
 	}
 
 };
