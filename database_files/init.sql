@@ -32,7 +32,7 @@ CREATE TABLE `answers` (
  `user_id` int(11) DEFAULT NULL,
  `question_id` int(11) DEFAULT NULL,
  `answer` text,
- `upvotes` int(11) DEFAULT NULL,
+ `upvotes` int(11) DEFAULT 0,
  `answered_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
  PRIMARY KEY (`id`),
  KEY `question_id` (`question_id`),
