@@ -59,13 +59,13 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `upvotes`) VALUES
 
 -- quesions
 
-INSERT INTO `questions` (`id`, `user_id`, `what`, `kabhi`) VALUES
-(1, 1, 'what is angularJS ?', '2017-10-18 08:44:25'),
-(2, 2, 'wubba luba dub dub', '2017-10-18 08:44:25');
+INSERT INTO `questions` (`id`, `user_id`, `description`,`question_header`, `asked_on`) VALUES
+(1, 1,'Is really wanted to know what is it ?', 'what is angularJS ?', '2017-10-18 08:44:25'),
+(2, 2, 'Rect and morty bitches!', 'wubba luba dub dub', '2017-10-18 08:44:25');
 
 -- answers
 
-INSERT INTO `answers` (`id`, `user_id`, `question_id`, `what`, `upvotes`, `kabhi`) VALUES
+INSERT INTO `answers` (`id`, `user_id`, `question_id`, `answer`, `upvotes`, `answered_on`) VALUES
 (1, 2, 1, 'angularJS is JS framework for frontend,\r\nthe project is maintained by google ,\r\nversions of angularJS include 1.x , 2.x , 4.x !!\r\nyes  it skipped the version 3 for odd reason', NULL, '2017-10-18 08:47:12'),
 (2, 1, 2, 'is this related to the forum !\r\ni know you are rick and morty fan !\r\nbut man @-@\r\n\r\n', NULL, '2017-10-18 08:48:28');
 
