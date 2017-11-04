@@ -13,3 +13,5 @@ An attempt to make a simple MVC from scratch in PIHP
 - Question Page UI 
 - Add Question UI
 - Add Answer UI
+- Error/Exception handling
+

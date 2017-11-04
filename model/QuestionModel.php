@@ -8,13 +8,11 @@ class QuestionModel extends CJ_Model{
 		parent::__contruct();
 	}
 
-	function get_all(){
-		return $this->read('questions',array('*'),null);
-	}
-
-	function get($id){
-
+	function get_by_question_id($id){
 		return $this->read('questions', array('*'), array('id'=>$id));
+	}
+	function add_question($data){
+		$this->create('questions',$data);
 	}
 }
  ?>

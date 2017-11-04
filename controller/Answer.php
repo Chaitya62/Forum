@@ -1,17 +1,17 @@
 <?php 
 
-require_once(__DIR__.'/../model/QuestionModel.php');
+require_once(__DIR__.'/../model/AnswerModel.php');
 
-class Question{
+class Answer{
 
 	function __construct(){
 		//echo 'user controller CLASS CREATED '."<br />";
-		$this->model=new QuestionModel();
+		$this->model=new AnswerModel();
 
 	}
 	//localhost/forum/index.php/Question/get
-	function get_get($id){
-		$result=$this->model->get_by_question_id($id);
+	function getByQuestionId_get($question_id){	
+		$result=$this->model->get_all_for_question($question_id);
 			echo json_encode($result);
 	}
 
@@ -19,9 +19,9 @@ class Question{
 		// print_r($_POST);
 		$data=array();
 		$data['user_id']=$_POST['user_id'];
-		$data['question_header']=$_POST['question_header'];
-		$data['description']=$_POST['description'];
-		$this->model->add_question($data);
+		$data['question_id']=$_POST['question_id'];
+		$data['answer']=$_POST['answer'];
+		$this->model->add_answer($data);
 		echo json_encode(array('status'=>'success'));
 	}
 

@@ -133,10 +133,10 @@ class CJ_Model{
 // $obj=new CJ_Model();
 
 // $where['id']='3';
-// $where['evw']=2;
+// $where['question_id']=10;
 
 // $rows=call_user_func_array(array($obj, 'create'), array('questions',array('user_id'=>1,'what'=>'isko insert karna he?')));
-// $rows=call_user_func_array(array($obj, 'read'), array('users',array('*'),null));
+// $rows=call_user_func_array(array($obj, 'read'), array('answers',array('*'),$where));
 // $rows=call_user_func_array(array($obj, 'update'), array('questions',array('what'=>'is science related to math?'),$where));
 // $rows=call_user_func_array(array($obj, 'delete'), array('questions',$where));
 // echo '<br>';
