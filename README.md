@@ -15,4 +15,8 @@ An attempt to make a simple MVC from scratch in PIHP
 - Add Answer UI
 - Error/Exception handling
 - Use Mysql based quering of database
-
+- SEO
+- GET Questions by USER ID - for profile page sorted by recent
+- GET Answers By USER ID - for profile page  sorted by recent
+- GET FEEDS 
+- Compete Writeup
