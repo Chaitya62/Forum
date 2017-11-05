@@ -72,8 +72,8 @@ DELIMITER ;
 -- users
 
 INSERT INTO `users` (`id`, `username`, `email`, `password`, `upvotes`) VALUES
-(1, 'jigar_wala', 'jigar.wala@forum.xyz', 'jwala', 15),
-(2, 'chaitya62', 'chaitya.shah@forum.xyz', 'testing123', 100);
+(1, 'jigar_wala', 'jigar.wala@forum.xyz', 'jwala', 1),
+(2, 'chaitya62', 'chaitya.shah@forum.xyz', 'testing123', 1);
 
 -- quesions
 
@@ -84,8 +84,8 @@ INSERT INTO `questions` (`id`, `user_id`, `description`,`question_header`, `aske
 -- answers
 
 INSERT INTO `answers` (`id`, `user_id`, `question_id`, `answer`, `upvotes`, `answered_on`) VALUES
-(1, 2, 1, 'angularJS is JS framework for frontend,\r\nthe project is maintained by google ,\r\nversions of angularJS include 1.x , 2.x , 4.x !!\r\nyes  it skipped the version 3 for odd reason', NULL, '2017-10-18 08:47:12'),
-(2, 1, 2, 'is this related to the forum !\r\ni know you are rick and morty fan !\r\nbut man @-@\r\n\r\n', NULL, '2017-10-18 08:48:28');
+(1, 2, 1, 'angularJS is JS framework for frontend,\r\nthe project is maintained by google ,\r\nversions of angularJS include 1.x , 2.x , 4.x !!\r\nyes  it skipped the version 3 for odd reason', 1, '2017-10-18 08:47:12'),
+(2, 1, 2, 'is this related to the forum !\r\ni know you are rick and morty fan !\r\nbut man @-@\r\n\r\n', 1, '2017-10-18 08:48:28');
 
 -- upvote_audit
 

@@ -14,12 +14,11 @@ class AnswerModel extends CJ_Model{
 	function add_answer($data){
 		$this->create('answers',$data);
 	}
-	function upvote_post($answer_id){
-		
-
-
+	function upvote($answer_id){
+		$whereArgs=array('id'=>$answer_id);
+		$cur=$this->read('answers',array('upvotes'),$whereArgs);
+		$curUpvote=$cur[0]['upvotes'];
+		$this->update('answers',array('upvotes'=>$curUpvote+1),$whereArgs);
 	}
-
-	
 }
- ?>
+?>

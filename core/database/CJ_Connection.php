@@ -4,7 +4,7 @@
 class CJ_Connection{
 
 	function __construct(){
-		require_once(__DIR__.'/../../config/database.php');
+		require(__DIR__.'/../../config/database.php');
 		$this->db_params = $db_params;
 	}
 

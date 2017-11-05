@@ -14,4 +14,5 @@ An attempt to make a simple MVC from scratch in PIHP
 - <del>Add Question UI</del>
 - Add Answer UI
 - Error/Exception handling
+- Use Mysql based quering of database
 
