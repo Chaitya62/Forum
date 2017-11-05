@@ -7,19 +7,21 @@ class UpvoteAuditModel extends CJ_Model{
 	function __contruct(){
 		parent::__contruct();
 	}
-
-	function get_all_for_question($question_id){
-		return $this->read('answers',array('*'),array('question_id'=>$question_id));
+	function add($userid,$answerid){
+		$data=array();
+		$data['answer_id']=$answerid;
+		$data['user_id']=$userid;
+		$this->create('upvote_audit',$data);
 	}
-	function add_answer($data){
-		$this->create('answers',$data);
+	function check_if_upvoted($userid,$answerid){
+		$result=$this->read('upvote_audit',array('*'),array('user_id'=>$userid,'answer_id'=>$answerid));
+		if(count($result)>0)
+			return true;
+		return false;
 	}
-	function upvote_post($answer_id){
-		
-
-
+	function get_by_userid($userid){
+		return $this->read('upvote_audit',array('answer_id'),array('user_id'=>$userid));
 	}
-
 	
 }
  ?>
