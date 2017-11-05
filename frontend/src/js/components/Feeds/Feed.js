@@ -14,7 +14,7 @@ class Feed extends Component{
 		console.log(this.props);
 		let feed  = this.props.feed;
 		return(
-			<div onClick={this.handleClick.bind(this)} className="card">
+			<div onClick={this.handleClick.bind(this)} className="feed-item card">
 				 
 				  <div className="card-block">
 				    <h4 className="card-title">{feed.question}</h4>

@@ -6,6 +6,15 @@ body{
 	
 }
 
+.feed-item{
+    transition: 0.2s all ease-in-out;
+}
+
+.feed-item:hover{
+    margin: 15px;
+    box-shadow: 5px 5px 4px -3px grey;
+}
+
 .search-form{
 	width: 100%;
 	margin: auto;
