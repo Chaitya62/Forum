@@ -25500,7 +25500,10 @@ var Feed = function (_Component) {
 	}, {
 		key: 'handleClick',
 		value: function handleClick() {
-			_AppActions2.default.viewQuestion(this.props.views);
+
+			//change later
+			var questionId = 1;
+			_AppActions2.default.viewQuestion(questionId);
 			this.props.changePath();
 
 			return;
@@ -26449,6 +26452,7 @@ var Question = function (_Component) {
 	_createClass(Question, [{
 		key: 'render',
 		value: function render() {
+			console.log("current Question id: ", _AppStore2.default.get('questionId'));
 
 			var question = 'This is a dummy question ?';
 			var qDescription = 'this is a dummy description';

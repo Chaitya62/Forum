@@ -30,7 +30,10 @@ class Feed extends Component{
 	}
 
 	handleClick(){
-		AppActions.viewQuestion(this.props.views);
+
+		//change later
+		var questionId = 1; 
+		AppActions.viewQuestion(questionId);
 		this.props.changePath();
 
 		return;
