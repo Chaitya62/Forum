@@ -13,7 +13,8 @@ class Question extends Component{
 	}
 	
 	render() {
-
+		console.log("current Question id: ",AppStore.get('questionId'));
+ 
 		var question = 'This is a dummy question ?';
 		var qDescription = 'this is a dummy description';
 		var username = 'testuser';
