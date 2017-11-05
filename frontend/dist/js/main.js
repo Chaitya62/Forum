@@ -26133,6 +26133,10 @@ var _AnswerForm = require('./AnswerForm');
 
 var _AnswerForm2 = _interopRequireDefault(_AnswerForm);
 
+var _AppStore = require('../../stores/AppStore');
+
+var _AppStore2 = _interopRequireDefault(_AppStore);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26147,16 +26151,24 @@ var AnswerList = exports.AnswerList = function (_Component) {
   function AnswerList(props) {
     _classCallCheck(this, AnswerList);
 
-    return _possibleConstructorReturn(this, (AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call(this, props));
+
+    _this.state = {
+      'isLoggedIn': _AppStore2.default.get('isLoggedIn')
+    };
+    return _this;
   }
 
   _createClass(AnswerList, [{
     key: 'render',
     value: function render() {
+      var isLoggedIn = this.state.isLoggedIn;
+
+      var answerForm = isLoggedIn ? _react2.default.createElement(_AnswerForm2.default, null) : null;
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_AnswerForm2.default, null),
+        answerForm,
         _react2.default.createElement(_Answer2.default, null),
         _react2.default.createElement(_Answer2.default, null),
         _react2.default.createElement(_Answer2.default, null),
@@ -26171,7 +26183,7 @@ var AnswerList = exports.AnswerList = function (_Component) {
 
 exports.default = AnswerList;
 
-},{"./Answer":235,"./AnswerForm":236,"react":223}],238:[function(require,module,exports){
+},{"../../stores/AppStore":247,"./Answer":235,"./AnswerForm":236,"react":223}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26900,15 +26912,18 @@ exports.default = {
 	TESTING: "TESTING",
 	VIEW_QUESTION: "VIEW_QUESTION",
 	SET_FEEDS: 'SET_FEEDS',
-	LOGIN_URL: 'http://localhost/forum/index.php/User/login',
 	'USER_LOGIN': 'USER_LOGIN',
 	'USER_LOGOUT': 'USER_LOGOUT',
 	'USER_SIGNUP': 'USER_SIGNUP',
-	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register',
 	'LOCAL_DATA': 'LOCAL_DATA',
 	'CACHE_STORE': 'CACHE_STORE',
 	'STORE': 'STORE',
-	'ASK_URL': 'http://localhost/forum/index.php/Question/add'
+
+	// urls
+	LOGIN_URL: 'http://localhost/forum/index.php/User/login',
+	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register',
+	'ASK_URL': 'http://localhost/forum/index.php/Question/add',
+	'GET_QUESTION_URL': 'http://localhost/forum/index.php/Question/get/'
 };
 
 },{}],245:[function(require,module,exports){
@@ -27029,6 +27044,8 @@ var CHANGE_EVENT = 'change';
 var _store = {
 	'test': 'stuff',
 	'questionId': '',
+	'question': [],
+	'answers': [],
 	'inQuestion': false,
 	'isLoggedIn': false,
 	'user_id': null,
@@ -27193,14 +27210,15 @@ module.exports = {
 				if (value) {
 					resolve(value);
 				} else {
-					console.log('here asdf');
 					resolve({
 						'test': 'stuff',
 						'questionId': '',
 						'inQuestion': false,
 						'isLoggedIn': false,
 						'user_id': null,
-						'feeds': []
+						'feeds': [],
+						'question': [],
+						'answers': []
 					});
 				}
 			});
@@ -27283,6 +27301,9 @@ module.exports = {
 		}
 
 		return new Promise(work);
+	},
+	"get_question": function get_question(id) {
+		var url = _AppConstants2.default.GET_QUESTION_URL + id;
 	}
 
 };

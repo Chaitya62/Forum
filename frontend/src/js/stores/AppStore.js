@@ -9,6 +9,8 @@ const CHANGE_EVENT = 'change';
 let _store ={
 	'test': 'stuff',
 	'questionId': '',
+	'question': [],
+	'answers': [],
 	'inQuestion': false,
 	'isLoggedIn': false,
 	'user_id': null,

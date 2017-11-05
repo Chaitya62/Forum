@@ -45,7 +45,6 @@ module.exports = {
 				if(value){
 					resolve(value); 
 				}else{
-					console.log('here asdf');
 					resolve({
 						'test': 'stuff',
 						'questionId': '',
@@ -53,6 +52,8 @@ module.exports = {
 						'isLoggedIn': false,
 						'user_id': null,
 						'feeds': [],
+						'question': [],
+						'answers': [],
 					});
 				}
 			});
@@ -142,7 +143,10 @@ module.exports = {
 		}
 
 		return new Promise(work);
-	}
+	},
+	"get_question": function(id){
+		var url = AppConstants.GET_QUESTION_URL + id;
+	},
 
 
 }
