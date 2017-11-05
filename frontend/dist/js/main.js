@@ -25239,7 +25239,7 @@ var AppActions = function () {
 
 exports.default = AppActions;
 
-},{"../constants/AppConstants":240,"../dispatcher/AppDispatcher":241}],228:[function(require,module,exports){
+},{"../constants/AppConstants":243,"../dispatcher/AppDispatcher":244}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25334,7 +25334,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../actions/AppActions":227,"../stores/AppStore":243,"./AppRoutes":229,"./Navbar":234,"react":223,"react-router-dom":186}],229:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":246,"./AppRoutes":229,"./Navbar":234,"react":223,"react-router-dom":186}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25420,7 +25420,7 @@ var AppRoutes = function (_Component) {
 
 exports.default = AppRoutes;
 
-},{"../actions/AppActions":227,"../stores/AppStore":243,"./Feeds/Feeds":232,"./Questions/Ask":235,"./Questions/Question":236,"./auth/Login":237,"./auth/Logout":238,"./auth/Signup":239,"react":223,"react-router-dom":186}],230:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":246,"./Feeds/Feeds":232,"./Questions/Ask":238,"./Questions/Question":239,"./auth/Login":240,"./auth/Logout":241,"./auth/Signup":242,"react":223,"react-router-dom":186}],230:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25467,7 +25467,7 @@ var Feed = function (_Component) {
 			var feed = this.props.feed;
 			return _react2.default.createElement(
 				'div',
-				{ onClick: this.handleClick.bind(this), className: 'card' },
+				{ onClick: this.handleClick.bind(this), className: 'feed-item card' },
 				_react2.default.createElement(
 					'div',
 					{ className: 'card-block' },
@@ -25517,7 +25517,7 @@ var Feed = function (_Component) {
 
 exports.default = Feed;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":243,"react":223,"react-router-dom":186}],231:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"react":223,"react-router-dom":186}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25584,7 +25584,7 @@ var FeedList = function (_Component) {
 
 exports.default = FeedList;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":243,"./Feed":230,"react":223}],232:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"./Feed":230,"react":223}],232:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25704,7 +25704,7 @@ var Feeds = function (_Component) {
 
 exports.default = Feeds;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":243,"../../utils/appAPI":244,"../Loader.js":233,"./FeedList":231,"react":223}],233:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"../../utils/appAPI":247,"../Loader.js":233,"./FeedList":231,"react":223}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25903,7 +25903,215 @@ var Navbar = function (_Component) {
 
 exports.default = Navbar;
 
-},{"../actions/AppActions":227,"../stores/AppStore":243,"react":223,"react-router-dom":186}],235:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":246,"react":223,"react-router-dom":186}],235:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Answer = function (_Component) {
+  _inherits(Answer, _Component);
+
+  function Answer(props) {
+    _classCallCheck(this, Answer);
+
+    return _possibleConstructorReturn(this, (Answer.__proto__ || Object.getPrototypeOf(Answer)).call(this, props));
+  }
+
+  _createClass(Answer, [{
+    key: "render",
+    value: function render() {
+
+      var username = "Username";
+      var answer = "This is a dummy answer to dummy question";
+
+      return _react2.default.createElement(
+        "div",
+        { className: "container-fluid" },
+        _react2.default.createElement(
+          "div",
+          { className: "card" },
+          _react2.default.createElement(
+            "div",
+            { className: "card-block" },
+            _react2.default.createElement(
+              "div",
+              { className: "row" },
+              _react2.default.createElement(
+                "div",
+                { className: "col-xs-8 col-md-8 col-lg-8 col-sm-8" },
+                _react2.default.createElement(
+                  "h3",
+                  { className: "card-title" },
+                  username
+                )
+              ),
+              _react2.default.createElement(
+                "div",
+                { className: "col-xs-4 col-md-4 col-lg-4 col-sm-4 text-right" },
+                _react2.default.createElement(
+                  "span",
+                  { className: "badge badge-info" },
+                  "10 upvotes"
+                )
+              )
+            ),
+            _react2.default.createElement(
+              "p",
+              { className: "card-text" },
+              answer
+            ),
+            _react2.default.createElement(
+              "a",
+              { href: "#", className: "btn btn-primary" },
+              "upvote"
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Answer;
+}(_react.Component);
+
+exports.default = Answer;
+
+},{"react":223}],236:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.AnswerList = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _Answer = require('./Answer');
+
+var _Answer2 = _interopRequireDefault(_Answer);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AnswerList = exports.AnswerList = function (_Component) {
+  _inherits(AnswerList, _Component);
+
+  function AnswerList(props) {
+    _classCallCheck(this, AnswerList);
+
+    return _possibleConstructorReturn(this, (AnswerList.__proto__ || Object.getPrototypeOf(AnswerList)).call(this, props));
+  }
+
+  _createClass(AnswerList, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        _react2.default.createElement(_Answer2.default, null),
+        _react2.default.createElement(_Answer2.default, null),
+        _react2.default.createElement(_Answer2.default, null),
+        _react2.default.createElement(_Answer2.default, null),
+        _react2.default.createElement(_Answer2.default, null)
+      );
+    }
+  }]);
+
+  return AnswerList;
+}(_react.Component);
+
+exports.default = AnswerList;
+
+},{"./Answer":235,"react":223}],237:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _AppActions = require('../../actions/AppActions');
+
+var _AppActions2 = _interopRequireDefault(_AppActions);
+
+var _AppStore = require('../../stores/AppStore');
+
+var _AppStore2 = _interopRequireDefault(_AppStore);
+
+var _AnswerList = require('./AnswerList');
+
+var _AnswerList2 = _interopRequireDefault(_AnswerList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Answers = function (_Component) {
+	_inherits(Answers, _Component);
+
+	function Answers(props) {
+		_classCallCheck(this, Answers);
+
+		return _possibleConstructorReturn(this, (Answers.__proto__ || Object.getPrototypeOf(Answers)).call(this, props));
+	}
+
+	_createClass(Answers, [{
+		key: 'render',
+		value: function render() {
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'container-fluid' },
+				_react2.default.createElement(_AnswerList2.default, null)
+			);
+		}
+	}, {
+		key: '_onChange',
+		value: function _onChange() {
+			this.setState(getAppState());
+		}
+	}]);
+
+	return Answers;
+}(_react.Component);
+
+exports.default = Answers;
+
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"./AnswerList":236,"react":223}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26060,7 +26268,7 @@ var Ask = function (_Component) {
 
 exports.default = Ask;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":243,"../../utils/appAPI":244,"react":223,"react-router-dom":186}],236:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"../../utils/appAPI":247,"react":223,"react-router-dom":186}],239:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26080,6 +26288,10 @@ var _AppActions2 = _interopRequireDefault(_AppActions);
 var _AppStore = require('../../stores/AppStore');
 
 var _AppStore2 = _interopRequireDefault(_AppStore);
+
+var _Answers = require('./Answers');
+
+var _Answers2 = _interopRequireDefault(_Answers);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26101,7 +26313,49 @@ var Question = function (_Component) {
 	_createClass(Question, [{
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement('div', { className: 'container-fluid' });
+
+			var question = 'This is a dummy question ?';
+			var qDescription = 'this is a dummy description';
+			var username = 'testuser';
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'container-fluid' },
+				_react2.default.createElement(
+					'div',
+					{ className: 'question-container' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'card' },
+						_react2.default.createElement(
+							'div',
+							{ className: 'card-block' },
+							_react2.default.createElement(
+								'h4',
+								{ className: 'card-title strong' },
+								question
+							),
+							_react2.default.createElement(
+								'h6',
+								{ className: 'card-subtitle mb-2 text-muted' },
+								'asked by ',
+								username
+							),
+							_react2.default.createElement(
+								'p',
+								{ className: 'card-text' },
+								qDescription
+							),
+							_react2.default.createElement('a', { href: '#', className: 'card-link' })
+						)
+					)
+				),
+				_react2.default.createElement(
+					'div',
+					{ className: 'answer' },
+					_react2.default.createElement(_Answers2.default, null)
+				)
+			);
 		}
 	}, {
 		key: '_onChange',
@@ -26115,7 +26369,7 @@ var Question = function (_Component) {
 
 exports.default = Question;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":243,"react":223}],237:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"./Answers":237,"react":223}],240:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26243,7 +26497,7 @@ var Login = function (_Component) {
 
 exports.default = Login;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":243,"../../utils/appAPI":244,"react":223,"react-router-dom":186}],238:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"../../utils/appAPI":247,"react":223,"react-router-dom":186}],241:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26300,7 +26554,7 @@ var Logout = function (_Component) {
 
 exports.default = Logout;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":243,"../../utils/appAPI":244,"react":223,"react-router-dom":186}],239:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"../../utils/appAPI":247,"react":223,"react-router-dom":186}],242:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26512,7 +26766,7 @@ var Signup = function (_Component) {
 
 exports.default = Signup;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":243,"../../utils/appAPI":244,"react":223,"react-router-dom":186}],240:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":246,"../../utils/appAPI":247,"react":223,"react-router-dom":186}],243:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26533,7 +26787,7 @@ exports.default = {
 	'ASK_URL': 'http://localhost/forum/index.php/Question/add'
 };
 
-},{}],241:[function(require,module,exports){
+},{}],244:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26578,7 +26832,7 @@ var appDispatcher = new AppDispatcher();
 
 exports.default = appDispatcher;
 
-},{"flux":26}],242:[function(require,module,exports){
+},{"flux":26}],245:[function(require,module,exports){
 'use strict';
 
 var _App = require('./components/App');
@@ -26615,7 +26869,7 @@ _appAPI2.default.get_store().then(function (store) {
 			), document.getElementById('app'));
 });
 
-},{"./actions/AppActions":227,"./components/App":228,"./utils/appAPI":244,"react":223,"react-dom":48,"react-router-dom":186}],243:[function(require,module,exports){
+},{"./actions/AppActions":227,"./components/App":228,"./utils/appAPI":247,"react":223,"react-dom":48,"react-router-dom":186}],246:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26764,7 +27018,7 @@ _AppDispatcher2.default.register(function (payload) {
 
 exports.default = AppStore;
 
-},{"../constants/AppConstants":240,"../dispatcher/AppDispatcher":241,"../utils/appAPI":244,"events":2}],244:[function(require,module,exports){
+},{"../constants/AppConstants":243,"../dispatcher/AppDispatcher":244,"../utils/appAPI":247,"events":2}],247:[function(require,module,exports){
 'use strict';
 
 var _AppConstants = require('../constants/AppConstants');
@@ -26909,4 +27163,4 @@ module.exports = {
 
 };
 
-},{"../actions/AppActions":227,"../constants/AppConstants":240}]},{},[242]);
+},{"../actions/AppActions":227,"../constants/AppConstants":243}]},{},[245]);
