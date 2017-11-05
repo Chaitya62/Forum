@@ -16,7 +16,6 @@ class Answer{
 	}
 
 	function add_post(){
-		// print_r($_POST);
 		$data=array();
 		$data['user_id']=$_POST['user_id'];
 		$data['question_id']=$_POST['question_id'];
@@ -24,7 +23,12 @@ class Answer{
 		$this->model->add_answer($data);
 		echo json_encode(array('status'=>'success'));
 	}
+	function upvote_post(){
+		$userid=$_POST['user_id'];
+		$answerid=$_POST['answer_id'];
+		
 
+	}
 }
 
  ?>

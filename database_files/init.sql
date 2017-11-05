@@ -50,6 +50,21 @@ CREATE TABLE `upvote_audit` (
  CONSTRAINT `upvote_audit_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 );
 
+
+-- Triggers
+-- user profile upvote Trigger
+/*DELIMITER $$
+CREATE  TRIGGER `users_table_upvotes_handler` AFTER UPDATE ON `answers` FOR EACH ROW 
+	BEGIN	
+		if NEW.upvotes > OLD.upvotes then
+		UPDATE users set upvotes=upvotes+1 where id=NEW.user_id;
+		elseif NEW.upvotes < OLD.upvotes then	
+		UPDATE users set upvotes=upvotes-1 where id=NEW.user_id;
+		end if;
+	END$$
+DELIMITER ;*/
+
+
 -- Tables data init
 -- users
 

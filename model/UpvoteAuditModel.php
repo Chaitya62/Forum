@@ -2,7 +2,7 @@
 
 require_once(__DIR__.'/../core/CJ_Model.php');
 
-class AnswerModel extends CJ_Model{
+class UpvoteAuditModel extends CJ_Model{
 
 	function __contruct(){
 		parent::__contruct();
