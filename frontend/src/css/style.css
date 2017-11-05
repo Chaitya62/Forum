@@ -6,12 +6,34 @@ body{
 	
 }
 
+.right-align{
+    float: right;
+}
+
+button.active.btn-like{
+    color: blue;
+
+}
+
+button.btn-like{
+    color: #AAAAAA;
+    background: transparent;
+    border: 0px;
+}
+
+button.btn-like:focus, button.btn-like:active {
+    outline: none;
+    border: none;
+
+}
+
 .feed-item{
     transition: 0.2s all ease-in-out;
 }
 
 .feed-item:hover{
-    margin: 15px;
+    margin-bottom: 15px;
+    margin-top: 15px;
     box-shadow: 5px 5px 4px -3px grey;
 }
 
@@ -61,6 +83,9 @@ body{
     width: 1em;
     z-index: 2147483647;
 }
+
+
+
 .bokeh li {
     border-radius: 50%;
     height: 0.2em;

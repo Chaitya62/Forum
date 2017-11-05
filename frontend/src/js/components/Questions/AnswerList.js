@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import Answer from './Answer';
+import AnswerForm from './AnswerForm';
 
 
 export class AnswerList extends Component {
@@ -11,6 +12,7 @@ export class AnswerList extends Component {
   render() {
     return (
       <div>
+      	<AnswerForm/>
       	<Answer />
       	<Answer />
       	<Answer />
