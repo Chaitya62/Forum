@@ -20,6 +20,11 @@ class UserModel extends CJ_Model{
 		return $this->read('users', array('*'), array('username'=>$username));
 	}
 
+	function get_username_by_id($id){
+		$result = $this->get($id);
+		return $result[0]['username'];
+	}
+
 	function get($id){
 
 		return $this->read('users', array('*'), array('id'=>$id));
