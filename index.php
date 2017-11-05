@@ -9,6 +9,7 @@ ini_set('display_errors', 'On'); */
 require('./controller/User.php');
 require('./controller/Question.php');
 require('./controller/Answer.php');
+require('./controller/Feeds.php');
 
 
 // call the controllers using 

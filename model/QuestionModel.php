@@ -7,7 +7,9 @@ class QuestionModel extends CJ_Model{
 	function __contruct(){
 		parent::__contruct();
 	}
-
+	function getAll(){
+		return $this->read('questions',array('*'),null);
+	}
 	function get_by_question_id($id){
 		return $this->read('questions', array('*'), array('id'=>$id));
 	}
