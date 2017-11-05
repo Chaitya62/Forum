@@ -18,14 +18,16 @@ class Navbar extends Component{
 		var isLoggedIn = AppStore.get('isLoggedIn');
 		console.log(this.state);
 
-		var log,profile,signup;
+		var log,profile,signup,ask;
 		if(isLoggedIn){
 			log = <NavLink className="nav-link" to="/logout"> Log Out </NavLink>
 			profile = <NavLink className="nav-link" to="/profile">My Profile</NavLink>
+			ask = <NavLink className = "nav-link" to="/ask">Ask</NavLink>
 		}else{
 			log = <NavLink className="nav-link" to="/login"> Log In </NavLink>
 			signup = <NavLink className="nav-link" to="/signup"> Signup </NavLink>
-			profile = null
+			profile = null;
+			ask = null;
 		}
 
 
@@ -40,8 +42,10 @@ class Navbar extends Component{
 				  <div className="collapse navbar-collapse" id="navbarSupportedContent">
 				    <ul className="navbar-nav mr-auto">
 				      <li className="nav-item active">
-				        <NavLink className="nav-link" to="/home">Home <span className="sr-only">(current)</span></NavLink>
-				      </li>
+				       {
+				       	ask
+				       } 
+				       </li>
 				      <li className="nav-item">
 				        { profile }
 				      </li>

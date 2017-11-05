@@ -16,8 +16,10 @@ function login_post(){
 	$data['username'] = $_POST['username'];
 	$data['password'] = md5($_POST['password']);
 	$result = $this->model->does_user_exist($data);
+
 	if(count($result) > 0){
 			$response['login'] = 'success';
+			$response['user_id'] = $result[0]['id'];
 	}else{
 		$response['login'] = 'failure';
 	}

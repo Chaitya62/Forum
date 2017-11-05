@@ -7,6 +7,7 @@ import Question from './Questions/Question';
 import Login from './auth/Login';
 import Logout from './auth/Logout';
 import Signup from './auth/Signup';
+import Ask from './Questions/Ask';
 
 class AppRoutes extends Component {
 
@@ -23,6 +24,7 @@ class AppRoutes extends Component {
       <Route path='/login' component = {Login} />
       <Route path='/logout' component = {Logout} />
       <Route path='/signup' component = {Signup} />
+      <Route path='/ask' component = {Ask} />
     </div>
   );
   }

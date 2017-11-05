@@ -11,6 +11,7 @@ let _store ={
 	'questionId': '',
 	'inQuestion': false,
 	'isLoggedIn': false,
+	'user_id': null,
 	'feeds': [],
 };
 
@@ -33,6 +34,12 @@ class AppStoreClass extends EventEmitter{
 			throw "Can append to Arrays only";
 		}
 		_store[name].push(value)
+	}
+
+	set(data){
+		console.log('here is it');
+		console.log(data);
+		_store = data;
 	}
 
 	/* Use to change value */
@@ -75,11 +82,17 @@ AppDispatcher.register((payload)=>{
 
 
 		case AppConstants.USER_LOGIN:
-			AppStore.change('isLoggedIn', action.data);
+			AppStore.change('isLoggedIn', true);
+			AppStore.change('user_id', action.data.user_id);
 			break;
 
 		case AppConstants.USER_LOGOUT:
 			AppStore.change('isLoggedIn', action.data);
+			AppStore.change('user_id', null);
+			break;
+		
+		case AppConstants.CACHE_STORE:
+			AppStore.set(action.data);
 			break;
 		/*
 	
@@ -89,6 +102,7 @@ AppDispatcher.register((payload)=>{
 			
 	}
 	AppStore.emitChange();
+	appAPI.cache_store(_store);
 	return true;
 });
 

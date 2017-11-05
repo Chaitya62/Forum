@@ -31,7 +31,7 @@ class AppActions{
 		
 		AppDispatcher.handleViewAction({
 			actionType: AppConstants.USER_LOGIN,
-			data: true
+			data: data
 		})
 	}
 
@@ -47,6 +47,13 @@ class AppActions{
 			actionType: AppConstants.USER_SIGNUP,
 			data: data
 		});
+	}
+
+	static setStore(data){
+		AppDispatcher.handleViewAction({
+			actionType: AppConstants.CACHE_STORE,
+			data: data
+		})
 	}
 	
 		
