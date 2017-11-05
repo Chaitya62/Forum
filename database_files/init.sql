@@ -53,16 +53,19 @@ CREATE TABLE `upvote_audit` (
 
 -- Triggers
 -- user profile upvote Trigger
-/*DELIMITER $$
-CREATE  TRIGGER `users_table_upvotes_handler` AFTER UPDATE ON `answers` FOR EACH ROW 
+DELIMITER $$
+
+CREATE  TRIGGER users_table_upvotes_handler AFTER UPDATE ON answers 
+	FOR EACH ROW 
 	BEGIN	
-		if NEW.upvotes > OLD.upvotes then
-		UPDATE users set upvotes=upvotes+1 where id=NEW.user_id;
-		elseif NEW.upvotes < OLD.upvotes then	
-		UPDATE users set upvotes=upvotes-1 where id=NEW.user_id;
-		end if;
+		IF (NEW.upvotes > OLD.upvotes) THEN
+		UPDATE users set upvotes=upvotes+1 where id = NEW.user_id;
+		END IF;
+		IF (NEW.upvotes < OLD.upvotes) THEN	
+		UPDATE users set upvotes = upvotes-1 where id=NEW.user_id;
+		END IF;
 	END$$
-DELIMITER ;*/
+DELIMITER ;
 
 
 -- Tables data init
