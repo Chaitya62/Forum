@@ -16,5 +16,8 @@ class QuestionModel extends CJ_Model{
 	function add_question($data){
 		$this->create('questions',$data);
 	}
+	function get_by_user_id($userid){
+		return $this->read('questions', array('*'), array('user_id'=>$userid));
+	}
 }
  ?>

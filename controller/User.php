@@ -1,12 +1,16 @@
 <?php 
 
 require_once(__DIR__.'/../model/UserModel.php');
+require_once(__DIR__.'/../model/QuestionModel.php');
+require_once(__DIR__.'/../model/AnswerModel.php');
 
 class User{
 
 function __construct(){
 	//echo 'user controller CLASS CREATED '."<br />";
 	$this->model=new UserModel();
+	$this->question_model=new QuestionModel();
+	$this->answer_model=new AnswerModel();
 
 }
 
@@ -73,11 +77,18 @@ function get_get($id){
 
 	$result = $this->model->get($id);
 	echo json_encode($result);
+}
 
+function getAllQuestions_get($userid){
+	$result=$this->question_model->get_by_user_id($userid);
+	echo json_encode($result);
+}
 
+function getAllAnswers_get($userid){
+	$result=$this->answer_model->get_by_user_id($userid);
+	echo json_encode($result);
 }
 
 }
-
 
  ?>

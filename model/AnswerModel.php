@@ -27,7 +27,14 @@ class AnswerModel extends CJ_Model{
 		$curUpvote=$cur[0]['upvotes'];
 		$this->update('answers',array('upvotes'=>$curUpvote+1),$whereArgs);
 	}
-
-
+	function unupvote($answer_id){
+		$whereArgs=array('id'=>$answer_id);
+		$cur=$this->read('answers',array('upvotes'),$whereArgs);
+		$curUpvote=$cur[0]['upvotes'];
+		$this->update('answers',array('upvotes'=>$curUpvote-1),$whereArgs);	
+	}
+	function get_by_user_id($userid){
+		return $this->read('answers', array('*'), array('user_id'=>$userid));
+	}
 }
 ?>

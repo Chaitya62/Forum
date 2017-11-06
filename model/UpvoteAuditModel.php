@@ -22,6 +22,8 @@ class UpvoteAuditModel extends CJ_Model{
 	function get_by_userid($userid){
 		return $this->read('upvote_audit',array('answer_id'),array('user_id'=>$userid));
 	}
-	
+	function remove($userid,$answerid){
+		$this->delete('upvote_audit',array('user_id'=>$userid,'answer_id'=>$answerid));
+	}
 }
  ?>
