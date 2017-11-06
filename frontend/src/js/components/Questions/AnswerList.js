@@ -15,15 +15,19 @@ export class AnswerList extends Component {
 
   render() {
     var {isLoggedIn} = this.state;
+    var {answers} = this.props;
     var answerForm = (isLoggedIn ?  <AnswerForm/> : null);
     return (
       <div>
         {answerForm}
-      	<Answer />
-      	<Answer />
-      	<Answer />
-      	<Answer />
-      	<Answer />
+      	{
+          answers.map((answer, i)=>{
+            return <Answer answer={answer} key={i} />
+          })
+
+
+
+        }
       	
       </div>
     );

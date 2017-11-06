@@ -25502,7 +25502,7 @@ var Feed = function (_Component) {
 		value: function handleClick() {
 
 			//change later
-			var questionId = 1;
+			var questionId = this.props.feed.question_id;
 			_AppActions2.default.viewQuestion(questionId);
 			this.props.changePath();
 
@@ -25622,6 +25622,10 @@ var _Loader = require('../Loader.js');
 
 var _Loader2 = _interopRequireDefault(_Loader);
 
+var _AppConstants = require('../../constants/AppConstants');
+
+var _AppConstants2 = _interopRequireDefault(_AppConstants);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25631,10 +25635,17 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function get_feeds() {
-	return _appAPI2.default.get_data("http://localhost/forum/test/test.json", null, 'GET').then(function (data, err) {
+	_appAPI2.default.get_data(_AppConstants2.default.GET_FEEDS_URL, null, 'get', false).then(function (response) {
+		console.log("asli data : ", response);
+		var data = JSON.parse(response);
+		console.log(data);
+	});
+
+	return _appAPI2.default.get_data(_AppConstants2.default.GET_FEEDS_URL, null, 'GET').then(function (data, err) {
 		if (err) console.log("There was an error ");
 		var parsedData = JSON.parse(data);
-		_AppActions2.default.setFeeds(parsedData.feeds);
+
+		_AppActions2.default.setFeeds(parsedData);
 		console.log("Hello, World!");
 	});
 }
@@ -25707,7 +25718,7 @@ var Feeds = function (_Component) {
 
 exports.default = Feeds;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":247,"../../utils/appAPI":248,"../Loader.js":233,"./FeedList":231,"react":223}],233:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../constants/AppConstants":244,"../../stores/AppStore":247,"../../utils/appAPI":248,"../Loader.js":233,"./FeedList":231,"react":223}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25919,6 +25930,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _appAPI = require('../../utils/appAPI');
+
+var _appAPI2 = _interopRequireDefault(_appAPI);
+
+var _AppStore = require('../../stores/AppStore');
+
+var _AppStore2 = _interopRequireDefault(_AppStore);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25936,8 +25955,8 @@ var Answer = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Answer.__proto__ || Object.getPrototypeOf(Answer)).call(this, props));
 
     _this.state = {
-      'upvotes': parseInt(Math.random() * 100),
-      'isLiked': parseInt(Math.random() * 100) % 2
+      'upvotes': _this.props.answer.upvotes,
+      'isLiked': _this.props.answer.isLiked == 'false' ? 0 : 1
     };
     return _this;
   }
@@ -25945,9 +25964,12 @@ var Answer = function (_Component) {
   _createClass(Answer, [{
     key: 'render',
     value: function render() {
+      var answer = this.props.answer;
 
-      var username = "Username";
-      var answer = "This is a dummy answer to dummy question";
+      console.log('upvotes :', answer.upvotes);
+      console.log(answer);
+      var username = answer.user;
+      var answer = answer.answer;
       var _state = this.state,
           upvotes = _state.upvotes,
           isLiked = _state.isLiked;
@@ -25981,7 +26003,7 @@ var Answer = function (_Component) {
                 { className: 'col-xs-4 col-md-4 col-lg-4 col-sm-4 text-right' },
                 _react2.default.createElement(
                   'span',
-                  { className: 'badge badge-info' },
+                  { className: 'badge upvotes badge-info' },
                   upvotes,
                   ' upvotes'
                 )
@@ -26004,6 +26026,8 @@ var Answer = function (_Component) {
           upvotes = _state2.upvotes,
           isLiked = _state2.isLiked;
 
+      console.log(upvotes);
+      console.log(isLiked);
       if (isLiked) {
         this.setState({ upvotes: upvotes - 1, isLiked: false });
       } else {
@@ -26014,11 +26038,21 @@ var Answer = function (_Component) {
   }, {
     key: 'onClickHandler',
     value: function onClickHandler(e) {
+      var isLiked = this.state.isLiked;
 
-      this.handleLike();
-      // do magic that will upvote the answer;
-      // upvote in ui if not 
-      // on failure notify that upvote failed
+
+      if (!isLiked) {
+        var answerId = this.props.answer.id;
+        var user_id = _AppStore2.default.get('user_id');
+        var self = this;
+
+        _appAPI2.default.upvote(answerId, user_id).then(function (data) {
+          self.handleLike();
+        }).catch(function (err) {
+          console.log("couldn't like ", err);
+        });
+      }
+      //downvote logic
     }
   }]);
 
@@ -26027,7 +26061,7 @@ var Answer = function (_Component) {
 
 exports.default = Answer;
 
-},{"react":223}],236:[function(require,module,exports){
+},{"../../stores/AppStore":247,"../../utils/appAPI":248,"react":223}],236:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -26166,17 +26200,16 @@ var AnswerList = exports.AnswerList = function (_Component) {
     key: 'render',
     value: function render() {
       var isLoggedIn = this.state.isLoggedIn;
+      var answers = this.props.answers;
 
       var answerForm = isLoggedIn ? _react2.default.createElement(_AnswerForm2.default, null) : null;
       return _react2.default.createElement(
         'div',
         null,
         answerForm,
-        _react2.default.createElement(_Answer2.default, null),
-        _react2.default.createElement(_Answer2.default, null),
-        _react2.default.createElement(_Answer2.default, null),
-        _react2.default.createElement(_Answer2.default, null),
-        _react2.default.createElement(_Answer2.default, null)
+        answers.map(function (answer, i) {
+          return _react2.default.createElement(_Answer2.default, { answer: answer, key: i });
+        })
       );
     }
   }]);
@@ -26211,6 +26244,14 @@ var _AnswerList = require('./AnswerList');
 
 var _AnswerList2 = _interopRequireDefault(_AnswerList);
 
+var _Loader = require('../Loader');
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
+var _appAPI = require('../../utils/appAPI');
+
+var _appAPI2 = _interopRequireDefault(_appAPI);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26225,18 +26266,49 @@ var Answers = function (_Component) {
 	function Answers(props) {
 		_classCallCheck(this, Answers);
 
-		return _possibleConstructorReturn(this, (Answers.__proto__ || Object.getPrototypeOf(Answers)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Answers.__proto__ || Object.getPrototypeOf(Answers)).call(this, props));
+
+		_this.state = {
+			'isLoading': false,
+			'answers': []
+		};
+		_this.loadData();
+		return _this;
 	}
 
 	_createClass(Answers, [{
 		key: 'render',
 		value: function render() {
+			var _state = this.state,
+			    isLoading = _state.isLoading,
+			    answers = _state.answers;
+
+
+			if (isLoading) {
+				return _react2.default.createElement(_Loader2.default, null);
+			}
 
 			return _react2.default.createElement(
 				'div',
 				{ className: 'container-fluid' },
-				_react2.default.createElement(_AnswerList2.default, null)
+				_react2.default.createElement(_AnswerList2.default, { answers: this.state.answers })
 			);
+		}
+	}, {
+		key: 'loadData',
+		value: function loadData() {
+			var questionId = _AppStore2.default.get('questionId');
+			var user_id = _AppStore2.default.get('user_id');
+			var self = this;
+
+			_appAPI2.default.get_answers(questionId, user_id).then(function (data) {
+				console.log('data : ', data);
+				data.filter(function (a, b) {
+					return a.upvotes > b.upvotes;
+				});
+				self.setState({ 'isLoading': false, 'answers': data });
+				return true;
+			});
 		}
 	}, {
 		key: '_onChange',
@@ -26250,7 +26322,7 @@ var Answers = function (_Component) {
 
 exports.default = Answers;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":247,"./AnswerList":237,"react":223}],239:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":247,"../../utils/appAPI":248,"../Loader":233,"./AnswerList":237,"react":223}],239:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26432,6 +26504,14 @@ var _Answers = require('./Answers');
 
 var _Answers2 = _interopRequireDefault(_Answers);
 
+var _appAPI = require('../../utils/appAPI');
+
+var _appAPI2 = _interopRequireDefault(_appAPI);
+
+var _Loader = require('../Loader');
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26446,17 +26526,33 @@ var Question = function (_Component) {
 	function Question(props) {
 		_classCallCheck(this, Question);
 
-		return _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).call(this, props));
+		var _this = _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).call(this, props));
+
+		_this.state = {
+			'isLoading': true,
+			'questionData': {}
+		};
+		_this.loadData();
+		return _this;
 	}
 
 	_createClass(Question, [{
 		key: 'render',
 		value: function render() {
+			var _state = this.state,
+			    isLoading = _state.isLoading,
+			    questionData = _state.questionData;
+
+
+			if (isLoading) {
+				return _react2.default.createElement(_Loader2.default, null);
+			}
+
 			console.log("current Question id: ", _AppStore2.default.get('questionId'));
 
-			var question = 'This is a dummy question ?';
-			var qDescription = 'this is a dummy description';
-			var username = 'testuser';
+			var question = questionData.question_header;
+			var qDescription = questionData.description;
+			var username = questionData.user;
 
 			return _react2.default.createElement(
 				'div',
@@ -26498,6 +26594,16 @@ var Question = function (_Component) {
 			);
 		}
 	}, {
+		key: 'loadData',
+		value: function loadData() {
+			var questionId = _AppStore2.default.get('questionId');
+			var self = this;
+			_appAPI2.default.get_question(questionId).then(function (data) {
+				self.setState({ 'isLoading': false, 'questionData': data });
+				return true;
+			});
+		}
+	}, {
 		key: '_onChange',
 		value: function _onChange() {
 			this.setState(getAppState());
@@ -26509,7 +26615,7 @@ var Question = function (_Component) {
 
 exports.default = Question;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":247,"./Answers":238,"react":223}],241:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":247,"../../utils/appAPI":248,"../Loader":233,"./Answers":238,"react":223}],241:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26927,7 +27033,10 @@ exports.default = {
 	LOGIN_URL: 'http://localhost/forum/index.php/User/login',
 	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register',
 	'ASK_URL': 'http://localhost/forum/index.php/Question/add',
-	'GET_QUESTION_URL': 'http://localhost/forum/index.php/Question/get/'
+	'GET_QUESTION_URL': 'http://localhost/forum/index.php/Question/get/',
+	'GET_ANSWERS_URL': 'http://localhost/forum/index.php/Answer/get/',
+	'UPVOTE_URL': 'http://localhost/forum/index.php/Answer/upvote/',
+	'GET_FEEDS_URL': 'http://localhost/forum/index.php/feeds/get'
 };
 
 },{}],245:[function(require,module,exports){
@@ -27308,6 +27417,43 @@ module.exports = {
 	},
 	"get_question": function get_question(id) {
 		var url = _AppConstants2.default.GET_QUESTION_URL + id;
+		var self = this;
+		function work(resolve, reject) {
+			return self.get_data(url, null, 'get', false).then(function (response) {
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+	},
+	"get_answers": function get_answers(questionId, user_id) {
+		var url = _AppConstants2.default.GET_ANSWERS_URL + questionId + '/' + user_id;
+		var self = this;
+
+		function work(resolve, reject) {
+			return self.get_data(url, null, 'get', false).then(function (response) {
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+	},
+	"upvote": function upvote(answerId, user_id) {
+		var url = _AppConstants2.default.UPVOTE_URL;
+		var params = "answer_id=" + answerId + "&user_id=" + user_id;
+		var self = this;
+
+		function work(resolve, reject) {
+			return self.get_data(url, null, 'post', false).then(function (response) {
+				console.log(response);
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
 	}
 
 };

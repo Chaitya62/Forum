@@ -8,6 +8,10 @@ class AnswerModel extends CJ_Model{
 		parent::__contruct();
 	}
 
+	function get_by_id($id){
+		return $this->read('answers', array('*'), array('id'=>$id));
+	}
+
 	function get_all_for_question($question_id){
 		return $this->read('answers',array('*'),array('question_id'=>$question_id));
 	}
@@ -23,5 +27,7 @@ class AnswerModel extends CJ_Model{
 		$curUpvote=$cur[0]['upvotes'];
 		$this->update('answers',array('upvotes'=>$curUpvote+1),$whereArgs);
 	}
+
+
 }
 ?>

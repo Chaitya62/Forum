@@ -16,4 +16,7 @@ export default  {
 	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register',
 	'ASK_URL': 'http://localhost/forum/index.php/Question/add',
 	'GET_QUESTION_URL': 'http://localhost/forum/index.php/Question/get/',
+	'GET_ANSWERS_URL':  'http://localhost/forum/index.php/Answer/get/',
+	'UPVOTE_URL': 'http://localhost/forum/index.php/Answer/upvote/',
+	'GET_FEEDS_URL': 'http://localhost/forum/index.php/feeds/get',
 }

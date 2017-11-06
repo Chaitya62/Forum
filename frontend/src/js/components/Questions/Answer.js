@@ -1,19 +1,23 @@
 import React,{Component} from 'react';
+import AppAPI from '../../utils/appAPI';
+import AppStore from '../../stores/AppStore';
 
 export default class Answer extends Component {
  
   constructor(props) {
     super(props);
     this.state = {
-    	'upvotes': parseInt(Math.random()*100),
-    	'isLiked': (parseInt(Math.random()*100))%2,
+    	'upvotes':  this.props.answer.upvotes,
+    	'isLiked': (this.props.answer.isLiked == 'false' ? 0 : 1),
     };
   }
 
   render() {
-
-  	var username = "Username"
-  	var answer = "This is a dummy answer to dummy question"
+    var {answer} = this.props;
+    console.log('upvotes :', answer.upvotes);
+    console.log(answer); 
+  	var username =  answer.user;
+  	var answer = answer.answer;
   	var {upvotes, isLiked} =  this.state;
   	var liked = "btn-like fa fa-thumbs-up fa-2x ";
   	liked += (isLiked ? 'active' : '' );
@@ -27,7 +31,7 @@ export default class Answer extends Component {
 		    <h3 className="card-title">{username}</h3>
 		  </div>
 		  <div className="col-xs-4 col-md-4 col-lg-4 col-sm-4 text-right">
-		  	<span className="badge badge-info">{upvotes} upvotes</span>
+		  	<span className="badge upvotes badge-info">{upvotes} upvotes</span>
 		  </div>
 		  </div>
 		    <p className="card-text">{answer}</p>
@@ -41,6 +45,8 @@ export default class Answer extends Component {
 
   handleLike(){
   	var {upvotes, isLiked} = this.state;
+    console.log(upvotes);
+    console.log(isLiked);
   	if(isLiked){
   		this.setState({upvotes : upvotes-1, isLiked: false});
   	}else{
@@ -51,10 +57,21 @@ export default class Answer extends Component {
 
   onClickHandler(e){
 
-  	this.handleLike();
-  	// do magic that will upvote the answer;
-  	// upvote in ui if not 
-  	// on failure notify that upvote failed
+    var {isLiked} = this.state;
+
+  	if(!isLiked){
+      var answerId = this.props.answer.id;
+      var user_id = AppStore.get('user_id');
+      var self = this;
+
+      AppAPI.upvote(answerId, user_id).then((data)=>{
+        self.handleLike();
+        
+      }).catch((err)=>{
+        console.log("couldn't like ", err);
+      });
+    }
+  	//downvote logic
   }
 
 }
