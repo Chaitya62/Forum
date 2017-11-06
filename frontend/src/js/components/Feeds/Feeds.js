@@ -4,13 +4,23 @@ import AppStore from '../../stores/AppStore';
 import AppAPI from '../../utils/appAPI';
 import FeedList from './FeedList';
 import Loader from '../Loader.js';
+import AppConstants from '../../constants/AppConstants';
 
 function get_feeds(){
-return 	AppAPI.get_data("http://localhost/forum/test/test.json", null, 'GET').then(
+		AppAPI.get_data(AppConstants.GET_FEEDS_URL, null, 'get',false).then((response)=>{
+			console.log("asli data : ", response);
+			var data = JSON.parse(response);
+			console.log(data);
+		})
+
+
+
+return 	AppAPI.get_data(AppConstants.GET_FEEDS_URL, null, 'GET').then(
 		function(data, err){
 		if(err) console.log("There was an error ");
 		var parsedData = JSON.parse(data);
-		AppActions.setFeeds(parsedData.feeds);
+
+		AppActions.setFeeds(parsedData);
 		console.log("Hello, World!");
 	}
 	);

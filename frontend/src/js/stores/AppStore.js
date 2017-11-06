@@ -15,6 +15,7 @@ let _store ={
 	'isLoggedIn': false,
 	'user_id': null,
 	'feeds': [],
+	'username': null,
 };
 
 class AppStoreClass extends EventEmitter{
@@ -85,6 +86,8 @@ AppDispatcher.register((payload)=>{
 
 		case AppConstants.USER_LOGIN:
 			AppStore.change('isLoggedIn', true);
+			console.log('DATA : ', action.data);
+			AppStore.change('username', action.data.username);
 			AppStore.change('user_id', action.data.user_id);
 			break;
 

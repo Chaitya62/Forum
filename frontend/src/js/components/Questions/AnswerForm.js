@@ -1,16 +1,28 @@
 import React,{Component} from 'react';
+import AppStore from '../../stores/AppStore';
+import AppAPI from '../../utils/appAPI';
 
 export default class AnswerForm extends Component {
 
   constructor(props) {
     super(props);
+    this.state={
+    	'username' : AppStore.get('username'),
+    	
+    
+    };
   }
 
 
 
 
   render() {
-  	  var username ="currentUser";
+
+  		if(this.props.hasAnswered){
+  			return null;
+  		}
+
+  	  var {username} =  this.state;
   	  var liked="btn btn-success right-align";
     return (
       <div className="container-fluid">
@@ -21,7 +33,7 @@ export default class AnswerForm extends Component {
 		    	<form className="">
 		    		<div className="form-group">
 		    			<p className="card-text">
-		    				<textarea className="form-control" placeholder="Enter your answer" cols="20" rows="10">
+		    				<textarea ref="answer" className="form-control" placeholder="Enter your answer" cols="20" rows="10">
 		    					
 		    				</textarea>
 		    			</p>	
@@ -41,7 +53,17 @@ export default class AnswerForm extends Component {
 
 
   onClickHandler(e){
+  	e.preventDefault();
   	console.log('answered');
+  	var questionId = AppStore.get('questionId');
+  	var userId = AppStore.get('user_id');
+  	var answer = this.refs.answer.value;
+
+  	AppAPI.answer(questionId, userId, answer).then((data)=>{
+  		console.log(data);
+  	});
+
+
   }
 
 }

@@ -20,6 +20,7 @@ function login_post(){
 	if(count($result) > 0){
 			$response['login'] = 'success';
 			$response['user_id'] = $result[0]['id'];
+			$response['username'] = $data['username'];
 	}else{
 		$response['login'] = 'failure';
 	}

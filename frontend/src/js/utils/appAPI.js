@@ -54,6 +54,7 @@ module.exports = {
 						'feeds': [],
 						'question': [],
 						'answers': [],
+						'username': null,
 					});
 				}
 			});
@@ -146,7 +147,63 @@ module.exports = {
 	},
 	"get_question": function(id){
 		var url = AppConstants.GET_QUESTION_URL + id;
-	},
+ 		var self = this;
+		function work(resolve, reject){
+			return self.get_data(url, null, 'get', false).then((response)=>{
+				var data  = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
 
+		return new Promise(work);
+	},
+	"get_answers": function(questionId, user_id){
+		var url = AppConstants.GET_ANSWERS_URL + questionId + '/' + user_id;
+		var self = this;
+
+		function work(resolve, reject){
+			return self.get_data(url, null,'get', false).then((response)=>{
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+
+	},
+	"upvote": function(answerId, user_id){
+		var url = AppConstants.UPVOTE_URL;
+		var params = "answer_id="+answerId+"&user_id="+user_id;
+		var self = this;
+
+		function work(resolve, reject){
+			return self.get_data(url, params, 'post', true).then((response)=>{
+				console.log(response);
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		} 
+
+		return new Promise(work);
+	},
+	"answer": function(questionId, user_id, answer){
+		var params = "question_id="+questionId+"&user_id="+user_id+"&answer="+answer;
+	
+		var self = this;
+
+		function work(resolve, reject){
+			return self.get_data(AppConstants.ANSWER_URL, params, 'post', true).then((response)=>{
+		
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+
+		return new Promise(work);
+
+	}
+
+		
 
 }
