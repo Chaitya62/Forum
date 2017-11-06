@@ -72,11 +72,8 @@ function get_get($id){
 
 	$result = $this->model->get($id);
 	echo json_encode($result);
-
-
 }
 
 }
-
 
  ?>
