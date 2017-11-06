@@ -19,4 +19,5 @@ export default  {
 	'GET_ANSWERS_URL':  'http://localhost/forum/index.php/Answer/get/',
 	'UPVOTE_URL': 'http://localhost/forum/index.php/Answer/upvote/',
 	'GET_FEEDS_URL': 'http://localhost/forum/index.php/feeds/get',
+	'ANSWER_URL': 'http://localhost/forum/index.php/Answer/add',
 }

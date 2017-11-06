@@ -7,15 +7,14 @@ export default class Answer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    	'upvotes':  this.props.answer.upvotes,
-    	'isLiked': (this.props.answer.isLiked == 'false' ? 0 : 1),
+    	'upvotes':  parseInt(this.props.answer.upvotes),
+    	'isLiked': (this.props.answer.isLiked),
     };
   }
 
   render() {
+
     var {answer} = this.props;
-    console.log('upvotes :', answer.upvotes);
-    console.log(answer); 
   	var username =  answer.user;
   	var answer = answer.answer;
   	var {upvotes, isLiked} =  this.state;
@@ -45,12 +44,13 @@ export default class Answer extends Component {
 
   handleLike(){
   	var {upvotes, isLiked} = this.state;
-    console.log(upvotes);
-    console.log(isLiked);
+   
   	if(isLiked){
   		this.setState({upvotes : upvotes-1, isLiked: false});
   	}else{
+      console.log('upvotes1 : ',upvotes);
   		this.setState({upvotes: upvotes+1, isLiked: true});
+      console.log('upvotes :',upvotes);
   	}
   	return true;
   }
@@ -66,6 +66,7 @@ export default class Answer extends Component {
 
       AppAPI.upvote(answerId, user_id).then((data)=>{
         self.handleLike();
+        console.log(data);
         
       }).catch((err)=>{
         console.log("couldn't like ", err);

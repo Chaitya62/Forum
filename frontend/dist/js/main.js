@@ -25955,8 +25955,8 @@ var Answer = function (_Component) {
     var _this = _possibleConstructorReturn(this, (Answer.__proto__ || Object.getPrototypeOf(Answer)).call(this, props));
 
     _this.state = {
-      'upvotes': _this.props.answer.upvotes,
-      'isLiked': _this.props.answer.isLiked == 'false' ? 0 : 1
+      'upvotes': parseInt(_this.props.answer.upvotes),
+      'isLiked': _this.props.answer.isLiked
     };
     return _this;
   }
@@ -25966,8 +25966,6 @@ var Answer = function (_Component) {
     value: function render() {
       var answer = this.props.answer;
 
-      console.log('upvotes :', answer.upvotes);
-      console.log(answer);
       var username = answer.user;
       var answer = answer.answer;
       var _state = this.state,
@@ -26026,12 +26024,13 @@ var Answer = function (_Component) {
           upvotes = _state2.upvotes,
           isLiked = _state2.isLiked;
 
-      console.log(upvotes);
-      console.log(isLiked);
+
       if (isLiked) {
         this.setState({ upvotes: upvotes - 1, isLiked: false });
       } else {
+        console.log('upvotes1 : ', upvotes);
         this.setState({ upvotes: upvotes + 1, isLiked: true });
+        console.log('upvotes :', upvotes);
       }
       return true;
     }
@@ -26048,6 +26047,7 @@ var Answer = function (_Component) {
 
         _appAPI2.default.upvote(answerId, user_id).then(function (data) {
           self.handleLike();
+          console.log(data);
         }).catch(function (err) {
           console.log("couldn't like ", err);
         });
@@ -26062,17 +26062,25 @@ var Answer = function (_Component) {
 exports.default = Answer;
 
 },{"../../stores/AppStore":247,"../../utils/appAPI":248,"react":223}],236:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-		value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _AppStore = require('../../stores/AppStore');
+
+var _AppStore2 = _interopRequireDefault(_AppStore);
+
+var _appAPI = require('../../utils/appAPI');
+
+var _appAPI2 = _interopRequireDefault(_appAPI);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26083,72 +26091,92 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var AnswerForm = function (_Component) {
-		_inherits(AnswerForm, _Component);
+  _inherits(AnswerForm, _Component);
 
-		function AnswerForm(props) {
-				_classCallCheck(this, AnswerForm);
+  function AnswerForm(props) {
+    _classCallCheck(this, AnswerForm);
 
-				return _possibleConstructorReturn(this, (AnswerForm.__proto__ || Object.getPrototypeOf(AnswerForm)).call(this, props));
-		}
+    var _this = _possibleConstructorReturn(this, (AnswerForm.__proto__ || Object.getPrototypeOf(AnswerForm)).call(this, props));
 
-		_createClass(AnswerForm, [{
-				key: "render",
-				value: function render() {
-						var username = "currentUser";
-						var liked = "btn btn-success right-align";
-						return _react2.default.createElement(
-								"div",
-								{ className: "container-fluid" },
-								_react2.default.createElement(
-										"div",
-										{ className: "card" },
-										_react2.default.createElement(
-												"div",
-												{ className: "card-block" },
-												_react2.default.createElement(
-														"h3",
-														{ className: "card-title" },
-														username
-												),
-												_react2.default.createElement(
-														"form",
-														{ className: "" },
-														_react2.default.createElement(
-																"div",
-																{ className: "form-group" },
-																_react2.default.createElement(
-																		"p",
-																		{ className: "card-text" },
-																		_react2.default.createElement("textarea", { className: "form-control", placeholder: "Enter your answer", cols: "20", rows: "10" })
-																)
-														),
-														_react2.default.createElement(
-																"div",
-																{ className: "form-group" },
-																_react2.default.createElement(
-																		"button",
-																		{ className: liked, onClick: this.onClickHandler.bind(this) },
-																		"Submit"
-																)
-														)
-												)
-										)
-								)
-						);
-				}
-		}, {
-				key: "onClickHandler",
-				value: function onClickHandler(e) {
-						console.log('answered');
-				}
-		}]);
+    _this.state = {
+      'username': _AppStore2.default.get('username')
 
-		return AnswerForm;
+    };
+    return _this;
+  }
+
+  _createClass(AnswerForm, [{
+    key: 'render',
+    value: function render() {
+
+      if (this.props.hasAnswered) {
+        return null;
+      }
+
+      var username = this.state.username;
+
+      var liked = "btn btn-success right-align";
+      return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid' },
+        _react2.default.createElement(
+          'div',
+          { className: 'card' },
+          _react2.default.createElement(
+            'div',
+            { className: 'card-block' },
+            _react2.default.createElement(
+              'h3',
+              { className: 'card-title' },
+              username
+            ),
+            _react2.default.createElement(
+              'form',
+              { className: '' },
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                  'p',
+                  { className: 'card-text' },
+                  _react2.default.createElement('textarea', { ref: 'answer', className: 'form-control', placeholder: 'Enter your answer', cols: '20', rows: '10' })
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'form-group' },
+                _react2.default.createElement(
+                  'button',
+                  { className: liked, onClick: this.onClickHandler.bind(this) },
+                  'Submit'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }, {
+    key: 'onClickHandler',
+    value: function onClickHandler(e) {
+      e.preventDefault();
+      console.log('answered');
+      var questionId = _AppStore2.default.get('questionId');
+      var userId = _AppStore2.default.get('user_id');
+      var answer = this.refs.answer.value;
+
+      _appAPI2.default.answer(questionId, userId, answer).then(function (data) {
+        console.log(data);
+      });
+    }
+  }]);
+
+  return AnswerForm;
 }(_react.Component);
 
 exports.default = AnswerForm;
 
-},{"react":223}],237:[function(require,module,exports){
+},{"../../stores/AppStore":247,"../../utils/appAPI":248,"react":223}],237:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26202,7 +26230,15 @@ var AnswerList = exports.AnswerList = function (_Component) {
       var isLoggedIn = this.state.isLoggedIn;
       var answers = this.props.answers;
 
-      var answerForm = isLoggedIn ? _react2.default.createElement(_AnswerForm2.default, null) : null;
+      var userId = _AppStore2.default.get('user_id');
+      var hasAnswered = false;
+      for (var i = 0; i < answers.length; i++) {
+        if (userId == answers[i].user_id) {
+          hasAnswered = true;
+          break;
+        }
+      }
+      var answerForm = isLoggedIn ? _react2.default.createElement(_AnswerForm2.default, { hasAnswered: hasAnswered }) : null;
       return _react2.default.createElement(
         'div',
         null,
@@ -27036,7 +27072,8 @@ exports.default = {
 	'GET_QUESTION_URL': 'http://localhost/forum/index.php/Question/get/',
 	'GET_ANSWERS_URL': 'http://localhost/forum/index.php/Answer/get/',
 	'UPVOTE_URL': 'http://localhost/forum/index.php/Answer/upvote/',
-	'GET_FEEDS_URL': 'http://localhost/forum/index.php/feeds/get'
+	'GET_FEEDS_URL': 'http://localhost/forum/index.php/feeds/get',
+	'ANSWER_URL': 'http://localhost/forum/index.php/Answer/add'
 };
 
 },{}],245:[function(require,module,exports){
@@ -27162,7 +27199,8 @@ var _store = {
 	'inQuestion': false,
 	'isLoggedIn': false,
 	'user_id': null,
-	'feeds': []
+	'feeds': [],
+	'username': null
 };
 
 var AppStoreClass = function (_EventEmitter) {
@@ -27249,6 +27287,8 @@ _AppDispatcher2.default.register(function (payload) {
 
 		case _AppConstants2.default.USER_LOGIN:
 			AppStore.change('isLoggedIn', true);
+			console.log('DATA : ', action.data);
+			AppStore.change('username', action.data.username);
 			AppStore.change('user_id', action.data.user_id);
 			break;
 
@@ -27331,7 +27371,8 @@ module.exports = {
 						'user_id': null,
 						'feeds': [],
 						'question': [],
-						'answers': []
+						'answers': [],
+						'username': null
 					});
 				}
 			});
@@ -27446,8 +27487,23 @@ module.exports = {
 		var self = this;
 
 		function work(resolve, reject) {
-			return self.get_data(url, null, 'post', false).then(function (response) {
+			return self.get_data(url, params, 'post', true).then(function (response) {
 				console.log(response);
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+	},
+	"answer": function answer(questionId, user_id, _answer) {
+		var params = "question_id=" + questionId + "&user_id=" + user_id + "&answer=" + _answer;
+
+		var self = this;
+
+		function work(resolve, reject) {
+			return self.get_data(_AppConstants2.default.ANSWER_URL, params, 'post', true).then(function (response) {
+
 				var data = JSON.parse(response);
 				resolve(data);
 			}).catch(reject);

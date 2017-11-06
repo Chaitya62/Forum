@@ -54,6 +54,7 @@ module.exports = {
 						'feeds': [],
 						'question': [],
 						'answers': [],
+						'username': null,
 					});
 				}
 			});
@@ -176,7 +177,7 @@ module.exports = {
 		var self = this;
 
 		function work(resolve, reject){
-			return self.get_data(url, null, 'post', false).then((response)=>{
+			return self.get_data(url, params, 'post', true).then((response)=>{
 				console.log(response);
 				var data = JSON.parse(response);
 				resolve(data);
@@ -184,7 +185,25 @@ module.exports = {
 		} 
 
 		return new Promise(work);
+	},
+	"answer": function(questionId, user_id, answer){
+		var params = "question_id="+questionId+"&user_id="+user_id+"&answer="+answer;
+	
+		var self = this;
+
+		function work(resolve, reject){
+			return self.get_data(AppConstants.ANSWER_URL, params, 'post', true).then((response)=>{
+		
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+
+		return new Promise(work);
+
 	}
 
+		
 
 }
