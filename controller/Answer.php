@@ -57,6 +57,22 @@ class Answer{
 		}
 		echo json_encode($response);
 	}
+	function unupvote_post(){
+		$userid=$_POST['user_id'];
+		$answerid=$_POST['answer_id'];
+		$response=array();
+		if($this->upvote_model->check_if_upvoted($userid,$answerid)==0){
+			$response['status']='failure';
+			$response['message']='Not upvoted already';
+		}else{
+			$this->model->unupvote($answerid);
+			$this->upvote_model->remove($userid,$answerid);
+			$response['status']='success';
+			$response['message']='unupvoted';
+		}
+		echo json_encode($response);	
+
+	}
 
 
 
