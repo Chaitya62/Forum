@@ -12,6 +12,14 @@ class AppActions{
 		 	test: test
 		});
 	}
+
+	static reload(){
+		AppDispatcher.handleViewAction({
+		 	actionType: AppConstants.RELOAD,
+		 	reload: true
+		});
+	}
+	
 	
 	static viewQuestion(id){
 		AppDispatcher.handleViewAction({

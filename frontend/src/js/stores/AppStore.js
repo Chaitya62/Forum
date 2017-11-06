@@ -16,6 +16,7 @@ let _store ={
 	'user_id': null,
 	'feeds': [],
 	'username': null,
+
 };
 
 class AppStoreClass extends EventEmitter{
@@ -99,6 +100,9 @@ AppDispatcher.register((payload)=>{
 		case AppConstants.CACHE_STORE:
 			AppStore.set(action.data);
 			break;
+
+		case AppConstants.RELOAD:
+			AppStore.change('test', 'changed');
 		/*
 	
 		Handle all the actions here

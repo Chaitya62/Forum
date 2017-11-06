@@ -25184,6 +25184,14 @@ var AppActions = function () {
 			});
 		}
 	}, {
+		key: 'reload',
+		value: function reload() {
+			_AppDispatcher2.default.handleViewAction({
+				actionType: _AppConstants2.default.RELOAD,
+				reload: true
+			});
+		}
+	}, {
 		key: 'viewQuestion',
 		value: function viewQuestion(id) {
 			_AppDispatcher2.default.handleViewAction({
@@ -25239,7 +25247,7 @@ var AppActions = function () {
 
 exports.default = AppActions;
 
-},{"../constants/AppConstants":251,"../dispatcher/AppDispatcher":252}],228:[function(require,module,exports){
+},{"../constants/AppConstants":252,"../dispatcher/AppDispatcher":253}],228:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25334,7 +25342,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"../actions/AppActions":227,"../stores/AppStore":254,"./AppRoutes":229,"./Navbar":234,"react":223,"react-router-dom":186}],229:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":255,"./AppRoutes":229,"./Navbar":234,"react":223,"react-router-dom":186}],229:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25385,6 +25393,10 @@ var _Profile = require('./Profile/Profile');
 
 var _Profile2 = _interopRequireDefault(_Profile);
 
+var _Reload = require('./Reload');
+
+var _Reload2 = _interopRequireDefault(_Reload);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25415,7 +25427,8 @@ var AppRoutes = function (_Component) {
         _react2.default.createElement(_reactRouterDom.Route, { path: '/logout', component: _Logout2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/signup', component: _Signup2.default }),
         _react2.default.createElement(_reactRouterDom.Route, { path: '/ask', component: _Ask2.default }),
-        _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/', component: _Profile2.default })
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/profile/', component: _Profile2.default }),
+        _react2.default.createElement(_reactRouterDom.Route, { path: '/reload/', component: _Reload2.default })
       );
     }
   }]);
@@ -25425,7 +25438,7 @@ var AppRoutes = function (_Component) {
 
 exports.default = AppRoutes;
 
-},{"../actions/AppActions":227,"../stores/AppStore":254,"./Feeds/Feeds":232,"./Profile/Profile":240,"./Questions/Ask":246,"./Questions/Question":247,"./auth/Login":248,"./auth/Logout":249,"./auth/Signup":250,"react":223,"react-router-dom":186}],230:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":255,"./Feeds/Feeds":232,"./Profile/Profile":240,"./Questions/Ask":246,"./Questions/Question":247,"./Reload":248,"./auth/Login":249,"./auth/Logout":250,"./auth/Signup":251,"react":223,"react-router-dom":186}],230:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25527,7 +25540,7 @@ var Feed = function (_Component) {
 
 exports.default = Feed;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"react":223,"react-router-dom":186}],231:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"react":223,"react-router-dom":186}],231:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25594,7 +25607,7 @@ var FeedList = function (_Component) {
 
 exports.default = FeedList;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"./Feed":230,"react":223}],232:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"./Feed":230,"react":223}],232:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -25725,7 +25738,7 @@ var Feeds = function (_Component) {
 
 exports.default = Feeds;
 
-},{"../../actions/AppActions":227,"../../constants/AppConstants":251,"../../stores/AppStore":254,"../../utils/appAPI":255,"../Loader.js":233,"./FeedList":231,"react":223}],233:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../constants/AppConstants":252,"../../stores/AppStore":255,"../../utils/appAPI":256,"../Loader.js":233,"./FeedList":231,"react":223}],233:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -25925,7 +25938,7 @@ var Navbar = function (_Component) {
 
 exports.default = Navbar;
 
-},{"../actions/AppActions":227,"../stores/AppStore":254,"react":223,"react-router-dom":186}],235:[function(require,module,exports){
+},{"../actions/AppActions":227,"../stores/AppStore":255,"react":223,"react-router-dom":186}],235:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26057,7 +26070,7 @@ var Answered = function (_Component) {
 
 exports.default = Answered;
 
-},{"../../utils/appAPI":255,"./Answer":235,"react":223}],237:[function(require,module,exports){
+},{"../../utils/appAPI":256,"./Answer":235,"react":223}],237:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26140,7 +26153,7 @@ var Asked = function (_Component) {
 
 exports.default = Asked;
 
-},{"../../utils/appAPI":255,"./Question":241,"react":223}],238:[function(require,module,exports){
+},{"../../utils/appAPI":256,"./Question":241,"react":223}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26507,7 +26520,7 @@ var Profile = function (_Component) {
 
 exports.default = Profile;
 
-},{"../../stores/AppStore":254,"../../utils/appAPI":255,"../Loader":233,"./Answers":236,"./Asked":237,"./Avatar":238,"./Details":239,"react":223}],241:[function(require,module,exports){
+},{"../../stores/AppStore":255,"../../utils/appAPI":256,"../Loader":233,"./Answers":236,"./Asked":237,"./Avatar":238,"./Details":239,"react":223}],241:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26519,6 +26532,12 @@ var _createClass = function () { function defineProperties(target, props) { for 
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = require('react-router-dom');
+
+var _AppActions = require('../../actions/AppActions');
+
+var _AppActions2 = _interopRequireDefault(_AppActions);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -26534,22 +26553,42 @@ var Question = function (_Component) {
   function Question(props) {
     _classCallCheck(this, Question);
 
-    return _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Question.__proto__ || Object.getPrototypeOf(Question)).call(this, props));
+
+    _this.state = {
+      'redirect': false
+    };
+    return _this;
   }
 
   _createClass(Question, [{
     key: 'render',
     value: function render() {
+
+      if (this.state.redirect) {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/questions' });
+      }
+
       console.log(this.props);
       return _react2.default.createElement(
         'tr',
         null,
         _react2.default.createElement(
           'td',
-          null,
+          { onClick: this.onClickHandler.bind(this) },
           this.props.question.question_header
         )
       );
+    }
+  }, {
+    key: 'onClickHandler',
+    value: function onClickHandler(e) {
+      e.preventDefault();
+      var questionId = this.props.question.id;
+      console.log('question :', questionId);
+      _AppActions2.default.viewQuestion(questionId);
+      //this.changePath();
+      this.setState({ redirect: true });
     }
   }]);
 
@@ -26558,7 +26597,7 @@ var Question = function (_Component) {
 
 exports.default = Question;
 
-},{"react":223}],242:[function(require,module,exports){
+},{"../../actions/AppActions":227,"react":223,"react-router-dom":186}],242:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26708,7 +26747,7 @@ var Answer = function (_Component) {
 
 exports.default = Answer;
 
-},{"../../stores/AppStore":254,"../../utils/appAPI":255,"react":223}],243:[function(require,module,exports){
+},{"../../stores/AppStore":255,"../../utils/appAPI":256,"react":223}],243:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26729,6 +26768,16 @@ var _appAPI = require('../../utils/appAPI');
 
 var _appAPI2 = _interopRequireDefault(_appAPI);
 
+var _reactRouterDom = require('react-router-dom');
+
+var _Loader = require('../Loader');
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
+var _AppActions = require('../../actions/AppActions');
+
+var _AppActions2 = _interopRequireDefault(_AppActions);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26746,7 +26795,10 @@ var AnswerForm = function (_Component) {
     var _this = _possibleConstructorReturn(this, (AnswerForm.__proto__ || Object.getPrototypeOf(AnswerForm)).call(this, props));
 
     _this.state = {
-      'username': _AppStore2.default.get('username')
+      'username': _AppStore2.default.get('username'),
+      'reload': false,
+      'isLoading': false,
+      'clicked': false
 
     };
     return _this;
@@ -26756,8 +26808,16 @@ var AnswerForm = function (_Component) {
     key: 'render',
     value: function render() {
 
+      if (this.state.reload) {
+        return _react2.default.createElement(_reactRouterDom.Redirect, { to: '/reload' });
+      }
+
       if (this.props.hasAnswered) {
         return null;
+      }
+
+      if (this.state.isLoading) {
+        return _react2.default.createElement(_Loader2.default, null);
       }
 
       var username = this.state.username;
@@ -26806,14 +26866,31 @@ var AnswerForm = function (_Component) {
   }, {
     key: 'onClickHandler',
     value: function onClickHandler(e) {
+      if (this.clicked) {
+        return false;
+      }
+      this.setState({ 'clicked': true });
       e.preventDefault();
       console.log('answered');
       var questionId = _AppStore2.default.get('questionId');
       var userId = _AppStore2.default.get('user_id');
       var answer = this.refs.answer.value;
 
+      if (answer.trim() === '') {
+        alert('Cannot submit empty answer');
+        this.setState({ 'clicked': false });
+        return false;
+      }
+
+      var self = this;
+
+      // this.setState({'isLoading': true});
+
       _appAPI2.default.answer(questionId, userId, answer).then(function (data) {
         console.log(data);
+        self.setState({ reload: true });
+        _AppActions2.default.reload();
+        // self.setState({'isLoading': false});
       });
     }
   }]);
@@ -26823,7 +26900,7 @@ var AnswerForm = function (_Component) {
 
 exports.default = AnswerForm;
 
-},{"../../stores/AppStore":254,"../../utils/appAPI":255,"react":223}],244:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"../../utils/appAPI":256,"../Loader":233,"react":223,"react-router-dom":186}],244:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26879,13 +26956,13 @@ var AnswerList = exports.AnswerList = function (_Component) {
 
       var userId = _AppStore2.default.get('user_id');
       var hasAnswered = false;
-      for (var i = 0; i < answers.length; i++) {
-        if (userId == answers[i].user_id) {
-          hasAnswered = true;
-          break;
-        }
-      }
-      var answerForm = isLoggedIn ? _react2.default.createElement(_AnswerForm2.default, { hasAnswered: hasAnswered }) : null;
+      // for(var i = 0;i<answers.length;i++){
+      //   if(userId == answers[i].user_id){
+      //     hasAnswered = true;
+      //     break;
+      //   }
+      // }
+      var answerForm = isLoggedIn ? _react2.default.createElement(_AnswerForm2.default, { reload: this.props.reload, hasAnswered: false }) : null;
       return _react2.default.createElement(
         'div',
         null,
@@ -26902,7 +26979,7 @@ var AnswerList = exports.AnswerList = function (_Component) {
 
 exports.default = AnswerList;
 
-},{"../../stores/AppStore":254,"./Answer":242,"./AnswerForm":243,"react":223}],245:[function(require,module,exports){
+},{"../../stores/AppStore":255,"./Answer":242,"./AnswerForm":243,"react":223}],245:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26953,7 +27030,8 @@ var Answers = function (_Component) {
 
 		_this.state = {
 			'isLoading': false,
-			'answers': []
+			'answers': [],
+			'dummy': null
 		};
 		_this.loadData();
 		return _this;
@@ -26974,7 +27052,7 @@ var Answers = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'container-fluid' },
-				_react2.default.createElement(_AnswerList2.default, { answers: this.state.answers })
+				_react2.default.createElement(_AnswerList2.default, { answers: this.state.answers, reload: this.props.reload })
 			);
 		}
 	}, {
@@ -27005,7 +27083,7 @@ var Answers = function (_Component) {
 
 exports.default = Answers;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"../../utils/appAPI":255,"../Loader":233,"./AnswerList":244,"react":223}],246:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"../../utils/appAPI":256,"../Loader":233,"./AnswerList":244,"react":223}],246:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27162,7 +27240,7 @@ var Ask = function (_Component) {
 
 exports.default = Ask;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"../../utils/appAPI":255,"react":223,"react-router-dom":186}],247:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"../../utils/appAPI":256,"react":223,"react-router-dom":186}],247:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27215,7 +27293,8 @@ var Question = function (_Component) {
 
 		_this.state = {
 			'isLoading': true,
-			'questionData': {}
+			'questionData': {},
+			'dummy': 'answer'
 		};
 		_this.loadData();
 		return _this;
@@ -27280,14 +27359,22 @@ var Question = function (_Component) {
 				_react2.default.createElement(
 					'div',
 					{ className: 'answer' },
-					_react2.default.createElement(_Answers2.default, null)
+					_react2.default.createElement(_Answers2.default, { reload: this.reload.bind(this) })
 				)
 			);
+		}
+	}, {
+		key: 'reload',
+		value: function reload() {
+			console.log('reload');
+			this.props.history.push(null, '/reload');
+			this.setState({ 'dummy': 'change' });
 		}
 	}, {
 		key: 'loadData',
 		value: function loadData() {
 			var questionId = _AppStore2.default.get('questionId');
+			console.log("question ID : here ", questionId);
 			var self = this;
 			_appAPI2.default.get_question(questionId).then(function (data) {
 				self.setState({ 'isLoading': false, 'questionData': data });
@@ -27306,7 +27393,51 @@ var Question = function (_Component) {
 
 exports.default = Question;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"../../utils/appAPI":255,"../Loader":233,"./Answers":245,"react":223,"react-router-dom":186}],248:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"../../utils/appAPI":256,"../Loader":233,"./Answers":245,"react":223,"react-router-dom":186}],248:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactRouterDom = require('react-router-dom');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Reload = function (_React$Component) {
+  _inherits(Reload, _React$Component);
+
+  function Reload(props) {
+    _classCallCheck(this, Reload);
+
+    return _possibleConstructorReturn(this, (Reload.__proto__ || Object.getPrototypeOf(Reload)).call(this, props));
+  }
+
+  _createClass(Reload, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(_reactRouterDom.Redirect, { to: 'questions/' });
+    }
+  }]);
+
+  return Reload;
+}(_react2.default.Component);
+
+exports.default = Reload;
+
+},{"react":223,"react-router-dom":186}],249:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27438,7 +27569,7 @@ var Login = function (_Component) {
 
 exports.default = Login;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"../../utils/appAPI":255,"react":223,"react-router-dom":186}],249:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"../../utils/appAPI":256,"react":223,"react-router-dom":186}],250:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27495,7 +27626,7 @@ var Logout = function (_Component) {
 
 exports.default = Logout;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"../../utils/appAPI":255,"react":223,"react-router-dom":186}],250:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"../../utils/appAPI":256,"react":223,"react-router-dom":186}],251:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27724,7 +27855,7 @@ var Signup = function (_Component) {
 
 exports.default = Signup;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"../../utils/appAPI":255,"react":223,"react-router-dom":186}],251:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":255,"../../utils/appAPI":256,"react":223,"react-router-dom":186}],252:[function(require,module,exports){
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -27740,6 +27871,7 @@ exports.default = {
 	'LOCAL_DATA': 'LOCAL_DATA',
 	'CACHE_STORE': 'CACHE_STORE',
 	'STORE': 'STORE',
+	'RELOAD': 'RELOAD',
 
 	// urls
 	LOGIN_URL: 'http://localhost/forum/index.php/User/login',
@@ -27756,7 +27888,7 @@ exports.default = {
 	'GET_USER_QUESTIONS_URL': 'http://localhost/forum/index.php/User/getAllQuestions/'
 };
 
-},{}],252:[function(require,module,exports){
+},{}],253:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27801,7 +27933,7 @@ var appDispatcher = new AppDispatcher();
 
 exports.default = appDispatcher;
 
-},{"flux":26}],253:[function(require,module,exports){
+},{"flux":26}],254:[function(require,module,exports){
 'use strict';
 
 var _App = require('./components/App');
@@ -27838,7 +27970,7 @@ _appAPI2.default.get_store().then(function (store) {
 			), document.getElementById('app'));
 });
 
-},{"./actions/AppActions":227,"./components/App":228,"./utils/appAPI":255,"react":223,"react-dom":48,"react-router-dom":186}],254:[function(require,module,exports){
+},{"./actions/AppActions":227,"./components/App":228,"./utils/appAPI":256,"react":223,"react-dom":48,"react-router-dom":186}],255:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27881,6 +28013,7 @@ var _store = {
 	'user_id': null,
 	'feeds': [],
 	'username': null
+
 };
 
 var AppStoreClass = function (_EventEmitter) {
@@ -27980,6 +28113,9 @@ _AppDispatcher2.default.register(function (payload) {
 		case _AppConstants2.default.CACHE_STORE:
 			AppStore.set(action.data);
 			break;
+
+		case _AppConstants2.default.RELOAD:
+			AppStore.change('test', 'changed');
 		/*
   		Handle all the actions here
   		*/
@@ -27992,7 +28128,7 @@ _AppDispatcher2.default.register(function (payload) {
 
 exports.default = AppStore;
 
-},{"../constants/AppConstants":251,"../dispatcher/AppDispatcher":252,"../utils/appAPI":255,"events":2}],255:[function(require,module,exports){
+},{"../constants/AppConstants":252,"../dispatcher/AppDispatcher":253,"../utils/appAPI":256,"events":2}],256:[function(require,module,exports){
 'use strict';
 
 var _AppConstants = require('../constants/AppConstants');
@@ -28259,4 +28395,4 @@ module.exports = {
 
 };
 
-},{"../actions/AppActions":227,"../constants/AppConstants":251}]},{},[253]);
+},{"../actions/AppActions":227,"../constants/AppConstants":252}]},{},[254]);

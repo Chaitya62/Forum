@@ -9,6 +9,7 @@ import Logout from './auth/Logout';
 import Signup from './auth/Signup';
 import Ask from './Questions/Ask';
 import Profile from './Profile/Profile';
+import Reload from './Reload';
 
 class AppRoutes extends Component {
 
@@ -27,6 +28,7 @@ class AppRoutes extends Component {
       <Route path='/signup' component = {Signup} />
       <Route path='/ask' component = {Ask} />
       <Route path='/profile/' component = {Profile} />
+      <Route path="/reload/" component={Reload} />
     </div>
   );
   }

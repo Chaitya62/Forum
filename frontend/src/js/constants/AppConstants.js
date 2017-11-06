@@ -8,6 +8,7 @@ export default  {
 	'LOCAL_DATA': 'LOCAL_DATA',
 	'CACHE_STORE': 'CACHE_STORE',
 	'STORE':'STORE',
+	'RELOAD': 'RELOAD',
 
 
 

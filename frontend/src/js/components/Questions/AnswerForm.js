@@ -1,6 +1,9 @@
 import React,{Component} from 'react';
 import AppStore from '../../stores/AppStore';
 import AppAPI from '../../utils/appAPI';
+import {Redirect} from 'react-router-dom';
+import Loader from '../Loader';
+import AppActions from '../../actions/AppActions';
 
 export default class AnswerForm extends Component {
 
@@ -8,6 +11,9 @@ export default class AnswerForm extends Component {
     super(props);
     this.state={
     	'username' : AppStore.get('username'),
+      'reload': false,
+      'isLoading': false,
+      'clicked': false,
     	
     
     };
@@ -18,9 +24,19 @@ export default class AnswerForm extends Component {
 
   render() {
 
+    if(this.state.reload){
+      return <Redirect to="/reload" />
+    }
+
   		if(this.props.hasAnswered){
   			return null;
   		}
+
+      if(this.state.isLoading){
+        return <Loader />
+      }
+
+      
 
   	  var {username} =  this.state;
   	  var liked="btn btn-success right-align";
@@ -53,15 +69,37 @@ export default class AnswerForm extends Component {
 
 
   onClickHandler(e){
+    if(this.clicked){
+      return false;
+    }
+    this.setState({'clicked': true});
   	e.preventDefault();
   	console.log('answered');
   	var questionId = AppStore.get('questionId');
   	var userId = AppStore.get('user_id');
   	var answer = this.refs.answer.value;
 
+    if(answer.trim() === ''){
+      alert('Cannot submit empty answer');
+      this.setState({'clicked': false});
+      return false; 
+    }
+
+    var self = this;
+
+    // this.setState({'isLoading': true});
+
   	AppAPI.answer(questionId, userId, answer).then((data)=>{
   		console.log(data);
+      self.setState({reload: true});
+       AppActions.reload();
+       // self.setState({'isLoading': false});
   	});
+
+
+    
+    
+   
 
 
   }

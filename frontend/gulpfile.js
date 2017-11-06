@@ -16,6 +16,8 @@ gulp.task('copy',function(){
 	.pipe(gulp.dest('dist'))
 	gulp.src('src/css/*.*')
 	.pipe(gulp.dest('dist/css'));
+	gulp.src('src/fonts/*.*')
+	.pipe(gulp.dest('dist/fonts'));
 	gulp.src('src/js/vendors/*.*')
 	.pipe(gulp.dest('dist/js'));
 	gulp.src('src/images/*.*')

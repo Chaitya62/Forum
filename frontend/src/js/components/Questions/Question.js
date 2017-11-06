@@ -16,6 +16,7 @@ class Question extends Component{
 		this.state = {
 			'isLoading': true,
 			'questionData': {},
+			'dummy': 'answer',
 		};
 		this.loadData();
 	}
@@ -52,16 +53,24 @@ class Question extends Component{
 				</div>
 				
 				<div className="answer">
-					<Answers />
+					<Answers reload={this.reload.bind(this)} />
 				</div>
 
 			</div>
 		)
 	}
 
+	reload(){
+		console.log('reload');
+		this.props.history.push(null, '/reload');
+		this.setState({'dummy': 'change'});
+	}
+
+
 
 	loadData(){
 		var questionId = AppStore.get('questionId');
+		console.log("question ID : here ", questionId);
 		var self = this;
 		AppAPI.get_question(questionId).then((data)=>{
 			self.setState({'isLoading':false, 'questionData': data});

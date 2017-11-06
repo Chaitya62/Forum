@@ -15,6 +15,7 @@ class Answers extends Component{
 		this.state = {
 			'isLoading': false,
 			'answers': [],
+			'dummy': null,
 		};
 		this.loadData();
 	}
@@ -31,7 +32,7 @@ class Answers extends Component{
 		return(
 			<div className="container-fluid">
 
-				<AnswerList answers={this.state.answers}  />
+				<AnswerList answers={this.state.answers} reload={this.props.reload}  />
 				
 			</div>
 		)
@@ -53,6 +54,7 @@ class Answers extends Component{
 
 
 	}
+
 
 
 	_onChange(){
