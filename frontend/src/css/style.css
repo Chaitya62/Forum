@@ -10,10 +10,20 @@ body{
     float: right;
 }
 
+.upvotes{
+    font-size: 14px;
+}
+
+
 button.active.btn-like{
     color: blue;
 
 }
+
+.hide{
+    display: none !important;
+}
+
 
 button.btn-like{
     color: #AAAAAA;

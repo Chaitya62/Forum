@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import AppActions from '../../actions/AppActions';
 import AppStore from '../../stores/AppStore';
-import {Router} from 'react-router-dom';
+import {NavLink,Router} from 'react-router-dom';
 
 
 
@@ -13,6 +13,7 @@ class Feed extends Component{
 	render() {
 		console.log(this.props);
 		let feed  = this.props.feed;
+		let profileLink ="/profile"+feed.user_id;
 		return(
 			<div onClick={this.handleClick.bind(this)} className="feed-item card">
 				 
@@ -21,9 +22,11 @@ class Feed extends Component{
 				    <p className="card-text">
 				    	{feed.summary}
 				    </p>
+				    <span>Asked by {feed.user}</span>
+				    <br />
 				    <span className="badge badge-success">{feed.answers} answers</span>
 				    &nbsp;
-				    <span className="badge badge-info">{feed.views} views</span> 
+				    
 				  </div>
 				</div>
 		)

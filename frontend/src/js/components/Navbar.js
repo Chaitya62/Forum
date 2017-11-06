@@ -19,9 +19,10 @@ class Navbar extends Component{
 		console.log(this.state);
 
 		var log,profile,signup,ask;
+		var profileLink = "/profile?user="+AppStore.get('user_id');
 		if(isLoggedIn){
 			log = <NavLink className="nav-link" to="/logout"> Log Out </NavLink>
-			profile = <NavLink className="nav-link" to="/profile">My Profile</NavLink>
+			profile = <NavLink className="nav-link" to={profileLink}>My Profile</NavLink>
 			ask = <NavLink className = "nav-link" to="/ask">Ask</NavLink>
 		}else{
 			log = <NavLink className="nav-link" to="/login"> Log In </NavLink>

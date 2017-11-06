@@ -17,9 +17,11 @@ export default class Answer extends Component {
     var {answer} = this.props;
   	var username =  answer.user;
   	var answer = answer.answer;
+    var isLoggedIn = AppStore.get('isLoggedIn');
   	var {upvotes, isLiked} =  this.state;
   	var liked = "btn-like fa fa-thumbs-up fa-2x ";
   	liked += (isLiked ? 'active' : '' );
+    if(!isLoggedIn) liked+= " hide";
 
     return (
       <div className="container-fluid">
@@ -30,7 +32,7 @@ export default class Answer extends Component {
 		    <h3 className="card-title">{username}</h3>
 		  </div>
 		  <div className="col-xs-4 col-md-4 col-lg-4 col-sm-4 text-right">
-		  	<span className="badge upvotes badge-info">{upvotes} upvotes</span>
+		  	<span className="badge upvotes badge-info">{upvotes} Likes</span>
 		  </div>
 		  </div>
 		    <p className="card-text">{answer}</p>
@@ -48,9 +50,7 @@ export default class Answer extends Component {
   	if(isLiked){
   		this.setState({upvotes : upvotes-1, isLiked: false});
   	}else{
-      console.log('upvotes1 : ',upvotes);
   		this.setState({upvotes: upvotes+1, isLiked: true});
-      console.log('upvotes :',upvotes);
   	}
   	return true;
   }
@@ -58,18 +58,25 @@ export default class Answer extends Component {
   onClickHandler(e){
 
     var {isLiked} = this.state;
-
-  	if(!isLiked){
-      var answerId = this.props.answer.id;
+     var answerId = this.props.answer.id;
       var user_id = AppStore.get('user_id');
       var self = this;
 
+
+  	if(!isLiked){
+     
       AppAPI.upvote(answerId, user_id).then((data)=>{
         self.handleLike();
         console.log(data);
         
       }).catch((err)=>{
         console.log("couldn't like ", err);
+      });
+    }else{
+      AppAPI.unvote(answerId, user_id).then((data)=>{
+        self.handleLike();
+      }).catch((err)=>{
+        console.log("couldn't unlike", err);
       });
     }
   	//downvote logic

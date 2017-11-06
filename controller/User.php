@@ -72,11 +72,23 @@ function getAll_get(){
 }
 
 
-//http://localhost/CJ-MVC/index.php/User/get/2/
+//http://localhost/forum/index.php/User/get/2/
 function get_get($id){
 
 	$result = $this->model->get($id);
 	echo json_encode($result);
+}
+
+function getU_get($id){
+	$result = $this->model->get($id);
+	$data = array();
+	$data['user_id'] = $id;
+	$data['username'] = $result[0]['username'];
+	$data['email'] = $result[0]['email'];
+	$data['upvotes'] = $result[0]['upvotes'];
+	$data['questions'] = $this->question_model->get_question_count_by_user($id);
+	$data['answers'] = $this->answer_model->get_answers_count_by_user($id);
+	echo json_encode($data);
 }
 
 function getAllQuestions_get($userid){

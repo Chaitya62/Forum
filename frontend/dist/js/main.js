@@ -25470,6 +25470,7 @@ var Feed = function (_Component) {
 		value: function render() {
 			console.log(this.props);
 			var feed = this.props.feed;
+			var profileLink = "/profile" + feed.user_id;
 			return _react2.default.createElement(
 				'div',
 				{ onClick: this.handleClick.bind(this), className: 'feed-item card' },
@@ -25488,17 +25489,18 @@ var Feed = function (_Component) {
 					),
 					_react2.default.createElement(
 						'span',
+						null,
+						'Asked by ',
+						feed.user
+					),
+					_react2.default.createElement('br', null),
+					_react2.default.createElement(
+						'span',
 						{ className: 'badge badge-success' },
 						feed.answers,
 						' answers'
 					),
-					'\xA0',
-					_react2.default.createElement(
-						'span',
-						{ className: 'badge badge-info' },
-						feed.views,
-						' views'
-					)
+					'\xA0'
 				)
 			);
 		}
@@ -25832,6 +25834,7 @@ var Navbar = function (_Component) {
 			console.log(this.state);
 
 			var log, profile, signup, ask;
+			var profileLink = "/profile?user=" + _AppStore2.default.get('user_id');
 			if (isLoggedIn) {
 				log = _react2.default.createElement(
 					_reactRouterDom.NavLink,
@@ -25840,7 +25843,7 @@ var Navbar = function (_Component) {
 				);
 				profile = _react2.default.createElement(
 					_reactRouterDom.NavLink,
-					{ className: 'nav-link', to: '/profile' },
+					{ className: 'nav-link', to: profileLink },
 					'My Profile'
 				);
 				ask = _react2.default.createElement(
@@ -25923,7 +25926,7 @@ var Navbar = function (_Component) {
 exports.default = Navbar;
 
 },{"../actions/AppActions":227,"../stores/AppStore":254,"react":223,"react-router-dom":186}],235:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -25931,7 +25934,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -25953,24 +25956,15 @@ var Answer = function (_React$Component) {
   }
 
   _createClass(Answer, [{
-    key: "render",
+    key: 'render',
     value: function render() {
       return _react2.default.createElement(
-        "div",
+        'tr',
         null,
         _react2.default.createElement(
-          "tr",
+          'td',
           null,
-          _react2.default.createElement(
-            "td",
-            null,
-            _react2.default.createElement(
-              "span",
-              { className: "float-right font-weight-bold" },
-              "9/4"
-            ),
-            " Maxamillion ais the fix for tibulum tincidunt ullamcorper eros."
-          )
+          this.props.answer.answer
         )
       );
     }
@@ -25998,6 +25992,10 @@ var _Answer = require('./Answer');
 
 var _Answer2 = _interopRequireDefault(_Answer);
 
+var _appAPI = require('../../utils/appAPI');
+
+var _appAPI2 = _interopRequireDefault(_appAPI);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26012,7 +26010,14 @@ var Answered = function (_Component) {
   function Answered(props) {
     _classCallCheck(this, Answered);
 
-    return _possibleConstructorReturn(this, (Answered.__proto__ || Object.getPrototypeOf(Answered)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Answered.__proto__ || Object.getPrototypeOf(Answered)).call(this, props));
+
+    _this.state = {
+      'answers': []
+    };
+
+    _this.loadData();
+    return _this;
   }
 
   _createClass(Answered, [{
@@ -26023,14 +26028,27 @@ var Answered = function (_Component) {
         null,
         _react2.default.createElement(
           'table',
-          { className: 'table table-hover table-striped' },
+          { className: 'table table-hover' },
           _react2.default.createElement(
             'tbody',
             null,
-            _react2.default.createElement(_Answer2.default, null)
+            this.state.answers.map(function (answer, i) {
+              return _react2.default.createElement(_Answer2.default, { answer: answer, key: i });
+            })
           )
         )
       );
+    }
+  }, {
+    key: 'loadData',
+    value: function loadData() {
+      var _this2 = this;
+
+      var user_id = this.props.user_id;
+
+      _appAPI2.default.get_user_answers(user_id).then(function (data) {
+        _this2.setState({ 'answers': data });
+      });
     }
   }]);
 
@@ -26039,7 +26057,7 @@ var Answered = function (_Component) {
 
 exports.default = Answered;
 
-},{"./Answer":235,"react":223}],237:[function(require,module,exports){
+},{"../../utils/appAPI":255,"./Answer":235,"react":223}],237:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26056,6 +26074,10 @@ var _Question = require('./Question');
 
 var _Question2 = _interopRequireDefault(_Question);
 
+var _appAPI = require('../../utils/appAPI');
+
+var _appAPI2 = _interopRequireDefault(_appAPI);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26070,25 +26092,46 @@ var Asked = function (_Component) {
   function Asked(props) {
     _classCallCheck(this, Asked);
 
-    return _possibleConstructorReturn(this, (Asked.__proto__ || Object.getPrototypeOf(Asked)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Asked.__proto__ || Object.getPrototypeOf(Asked)).call(this, props));
+
+    _this.state = {
+      'questions': []
+    };
+
+    _this.loadData();
+    return _this;
   }
 
   _createClass(Asked, [{
     key: 'render',
     value: function render() {
+
       return _react2.default.createElement(
         'div',
         null,
         _react2.default.createElement(
           'table',
-          { className: 'table table-hover table-striped' },
+          { className: 'table table-hover ' },
           _react2.default.createElement(
             'tbody',
             null,
-            _react2.default.createElement(_Question2.default, null)
+            this.state.questions.map(function (question, i) {
+              return _react2.default.createElement(_Question2.default, { question: question, key: i });
+            })
           )
         )
       );
+    }
+  }, {
+    key: 'loadData',
+    value: function loadData() {
+      var user_id = this.props.user_id;
+      var self = this;
+
+      _appAPI2.default.get_user_questions(user_id).then(function (data) {
+
+        self.setState({ questions: data });
+      });
     }
   }]);
 
@@ -26097,7 +26140,7 @@ var Asked = function (_Component) {
 
 exports.default = Asked;
 
-},{"./Question":241,"react":223}],238:[function(require,module,exports){
+},{"../../utils/appAPI":255,"./Question":241,"react":223}],238:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -26124,18 +26167,16 @@ var Avatar = function (_Component) {
   function Avatar(props) {
     _classCallCheck(this, Avatar);
 
-    var _this = _possibleConstructorReturn(this, (Avatar.__proto__ || Object.getPrototypeOf(Avatar)).call(this, props));
-
-    _this.state = {
-      'username': 'test'
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (Avatar.__proto__ || Object.getPrototypeOf(Avatar)).call(this, props));
   }
 
   _createClass(Avatar, [{
     key: 'render',
     value: function render() {
-      var username = this.state.username;
+      var user = this.props.user;
+
+      console.log('user ,', user);
+      var username = user.username;
 
       return _react2.default.createElement(
         'div',
@@ -26274,7 +26315,7 @@ exports.default = Details;
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -26307,6 +26348,10 @@ var _Details = require('./Details');
 
 var _Details2 = _interopRequireDefault(_Details);
 
+var _Loader = require('../Loader');
+
+var _Loader2 = _interopRequireDefault(_Loader);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26316,123 +26361,154 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Profile = function (_Component) {
-    _inherits(Profile, _Component);
+  _inherits(Profile, _Component);
 
-    function Profile(props) {
-        _classCallCheck(this, Profile);
+  function Profile(props) {
+    _classCallCheck(this, Profile);
 
-        return _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
-    }
+    var _this = _possibleConstructorReturn(this, (Profile.__proto__ || Object.getPrototypeOf(Profile)).call(this, props));
 
-    _createClass(Profile, [{
-        key: 'render',
-        value: function render() {
+    var user_id = _appAPI2.default.getParameterByName('user');
+    _this.state = {
+      'user_id': user_id,
+      'isLoading': true,
+      'user': {}
+    };
+    _this.loadData();
+    return _this;
+  }
 
-            console.log(this.props);
-            var url = this.props.location.search;
-            var user_id = _appAPI2.default.getParameterByName('user');
+  _createClass(Profile, [{
+    key: 'render',
+    value: function render() {
 
-            if (user_id == null) {
-                return _react2.default.createElement(
-                    'div',
-                    { className: 'container text-center' },
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement('br', null),
-                    _react2.default.createElement(
-                        'h3',
-                        { className: 'lead strong mt-6' },
-                        'Broken URL'
-                    )
-                );
-            }
+      console.log(this.props);
+      var url = this.props.location.search;
+      var _state = this.state,
+          user_id = _state.user_id,
+          isLoading = _state.isLoading;
 
-            return _react2.default.createElement(
-                'div',
-                { className: 'container-fluid mt-5' },
+
+      if (user_id == null) {
+        return _react2.default.createElement(
+          'div',
+          { className: 'container text-center' },
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement('br', null),
+          _react2.default.createElement(
+            'h3',
+            { className: 'lead strong mt-6' },
+            'Broken URL'
+          )
+        );
+      }
+
+      if (isLoading) {
+        return _react2.default.createElement(_Loader2.default, null);
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'container-fluid mt-5' },
+        _react2.default.createElement(
+          'div',
+          { className: 'container-fluid mt-5' },
+          _react2.default.createElement(
+            'div',
+            { className: 'row my-2' },
+            _react2.default.createElement(
+              'div',
+              { className: 'col-lg-4 order-lg-1 text-center' },
+              _react2.default.createElement(_Avatar2.default, { user: this.state.user })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'col-lg-8 order-lg-2' },
+              _react2.default.createElement(
+                'ul',
+                { className: 'nav nav-tabs' },
                 _react2.default.createElement(
-                    'div',
-                    { className: 'container-fluid mt-5' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'row my-2' },
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'col-lg-4 order-lg-1 text-center' },
-                            _react2.default.createElement(_Avatar2.default, null)
-                        ),
-                        _react2.default.createElement(
-                            'div',
-                            { className: 'col-lg-8 order-lg-2' },
-                            _react2.default.createElement(
-                                'ul',
-                                { className: 'nav nav-tabs' },
-                                _react2.default.createElement(
-                                    'li',
-                                    { className: 'nav-item' },
-                                    _react2.default.createElement(
-                                        'a',
-                                        { href: '', 'data-target': '#profile', 'data-toggle': 'tab', className: 'nav-link active' },
-                                        'Profile'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    { className: 'nav-item' },
-                                    _react2.default.createElement(
-                                        'a',
-                                        { href: '', 'data-target': '#asked', 'data-toggle': 'tab', className: 'nav-link' },
-                                        'Asked'
-                                    )
-                                ),
-                                _react2.default.createElement(
-                                    'li',
-                                    { className: 'nav-item' },
-                                    _react2.default.createElement(
-                                        'a',
-                                        { href: '', 'data-target': '#edit', 'data-toggle': 'tab', className: 'nav-link' },
-                                        'Edit'
-                                    )
-                                )
-                            ),
-                            _react2.default.createElement(
-                                'div',
-                                { className: 'tab-content py-4' },
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'tab-pane active', id: 'profile' },
-                                    _react2.default.createElement(_Details2.default, { username: 'Rick', upvotes: '10', questions: '10', answers: '1', email: 'evilmorty@rickestrick.com' })
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'tab-pane', id: 'asked' },
-                                    _react2.default.createElement(_Asked2.default, null)
-                                ),
-                                _react2.default.createElement(
-                                    'div',
-                                    { className: 'tab-pane', id: 'edit' },
-                                    _react2.default.createElement(_Answers2.default, null)
-                                )
-                            )
-                        )
-                    )
+                  'li',
+                  { className: 'nav-item' },
+                  _react2.default.createElement(
+                    'a',
+                    { href: '', 'data-target': '#profile', 'data-toggle': 'tab', className: 'nav-link active' },
+                    'Profile'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  { className: 'nav-item' },
+                  _react2.default.createElement(
+                    'a',
+                    { href: '', 'data-target': '#asked', 'data-toggle': 'tab', className: 'nav-link' },
+                    'Asked'
+                  )
+                ),
+                _react2.default.createElement(
+                  'li',
+                  { className: 'nav-item' },
+                  _react2.default.createElement(
+                    'a',
+                    { href: '', 'data-target': '#answers', 'data-toggle': 'tab', className: 'nav-link' },
+                    'Answers'
+                  )
                 )
-            );
-        }
-    }]);
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'tab-content py-4' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'tab-pane active', id: 'profile' },
+                  _react2.default.createElement(_Details2.default, this.state.user)
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'tab-pane', id: 'asked' },
+                  _react2.default.createElement(_Asked2.default, { user_id: this.state.user_id })
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'tab-pane', id: 'answers' },
+                  _react2.default.createElement(_Answers2.default, { user_id: this.state.user_id })
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }, {
+    key: 'loadData',
+    value: function loadData() {
+      var user_id = this.state.user_id;
 
-    return Profile;
+      var self = this;
+
+      _appAPI2.default.userDetails(user_id).then(function (data) {
+        console.log('here it is bitch', data);
+        self.setState({ isLoading: false, user: data });
+      }).catch(function (err) {
+
+        console.log(err);
+      });
+    }
+  }]);
+
+  return Profile;
 }(_react.Component);
 
 exports.default = Profile;
 
-},{"../../stores/AppStore":254,"../../utils/appAPI":255,"./Answers":236,"./Asked":237,"./Avatar":238,"./Details":239,"react":223}],241:[function(require,module,exports){
-"use strict";
+},{"../../stores/AppStore":254,"../../utils/appAPI":255,"../Loader":233,"./Answers":236,"./Asked":237,"./Avatar":238,"./Details":239,"react":223}],241:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
   value: true
@@ -26440,7 +26516,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -26462,20 +26538,16 @@ var Question = function (_Component) {
   }
 
   _createClass(Question, [{
-    key: "render",
+    key: 'render',
     value: function render() {
+      console.log(this.props);
       return _react2.default.createElement(
-        "tr",
+        'tr',
         null,
         _react2.default.createElement(
-          "td",
+          'td',
           null,
-          _react2.default.createElement(
-            "span",
-            { className: "float-right font-weight-bold" },
-            "9/4"
-          ),
-          " Maxamillion ais the fix for tibulum tincidunt ullamcorper eros."
+          this.props.question.question_header
         )
       );
     }
@@ -26537,12 +26609,14 @@ var Answer = function (_Component) {
 
       var username = answer.user;
       var answer = answer.answer;
+      var isLoggedIn = _AppStore2.default.get('isLoggedIn');
       var _state = this.state,
           upvotes = _state.upvotes,
           isLiked = _state.isLiked;
 
       var liked = "btn-like fa fa-thumbs-up fa-2x ";
       liked += isLiked ? 'active' : '';
+      if (!isLoggedIn) liked += " hide";
 
       return _react2.default.createElement(
         'div',
@@ -26572,7 +26646,7 @@ var Answer = function (_Component) {
                   'span',
                   { className: 'badge upvotes badge-info' },
                   upvotes,
-                  ' upvotes'
+                  ' Likes'
                 )
               )
             ),
@@ -26597,9 +26671,7 @@ var Answer = function (_Component) {
       if (isLiked) {
         this.setState({ upvotes: upvotes - 1, isLiked: false });
       } else {
-        console.log('upvotes1 : ', upvotes);
         this.setState({ upvotes: upvotes + 1, isLiked: true });
-        console.log('upvotes :', upvotes);
       }
       return true;
     }
@@ -26608,17 +26680,23 @@ var Answer = function (_Component) {
     value: function onClickHandler(e) {
       var isLiked = this.state.isLiked;
 
+      var answerId = this.props.answer.id;
+      var user_id = _AppStore2.default.get('user_id');
+      var self = this;
 
       if (!isLiked) {
-        var answerId = this.props.answer.id;
-        var user_id = _AppStore2.default.get('user_id');
-        var self = this;
 
         _appAPI2.default.upvote(answerId, user_id).then(function (data) {
           self.handleLike();
           console.log(data);
         }).catch(function (err) {
           console.log("couldn't like ", err);
+        });
+      } else {
+        _appAPI2.default.unvote(answerId, user_id).then(function (data) {
+          self.handleLike();
+        }).catch(function (err) {
+          console.log("couldn't unlike", err);
         });
       }
       //downvote logic
@@ -27117,6 +27195,8 @@ var _Loader = require('../Loader');
 
 var _Loader2 = _interopRequireDefault(_Loader);
 
+var _reactRouterDom = require('react-router-dom');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27158,6 +27238,7 @@ var Question = function (_Component) {
 			var question = questionData.question_header;
 			var qDescription = questionData.description;
 			var username = questionData.user;
+			var profileLink = "/profile?user=" + questionData.user_id;
 
 			return _react2.default.createElement(
 				'div',
@@ -27180,7 +27261,12 @@ var Question = function (_Component) {
 								'h6',
 								{ className: 'card-subtitle mb-2 text-muted' },
 								'asked by ',
-								username
+								_react2.default.createElement(
+									_reactRouterDom.NavLink,
+									{ to: profileLink },
+									' ',
+									username
+								)
 							),
 							_react2.default.createElement(
 								'p',
@@ -27220,7 +27306,7 @@ var Question = function (_Component) {
 
 exports.default = Question;
 
-},{"../../actions/AppActions":227,"../../stores/AppStore":254,"../../utils/appAPI":255,"../Loader":233,"./Answers":245,"react":223}],248:[function(require,module,exports){
+},{"../../actions/AppActions":227,"../../stores/AppStore":254,"../../utils/appAPI":255,"../Loader":233,"./Answers":245,"react":223,"react-router-dom":186}],248:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -27597,6 +27683,23 @@ var Signup = function (_Component) {
 				return true;
 			}
 
+			function ValidateEmail(email) {
+				var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+				if (email.match(mailformat)) {
+					return true;
+				} else {
+					return false;
+				}
+			}
+
+			var pattern = /[a-zA-Z_0-9]+@[a-zA-Z_0-9]+\.[a-zA-Z]+/;
+
+			if (!ValidateEmail(email.value)) {
+				message = "email format is incorrect";
+				this.setState({ 'message': message });
+				return true;
+			}
+
 			var self = this;
 			_appAPI2.default.createUser(username, password, email).then(function (data) {
 				var success = data.success;
@@ -27646,7 +27749,11 @@ exports.default = {
 	'GET_ANSWERS_URL': 'http://localhost/forum/index.php/Answer/get/',
 	'UPVOTE_URL': 'http://localhost/forum/index.php/Answer/upvote/',
 	'GET_FEEDS_URL': 'http://localhost/forum/index.php/feeds/get',
-	'ANSWER_URL': 'http://localhost/forum/index.php/Answer/add'
+	'ANSWER_URL': 'http://localhost/forum/index.php/Answer/add',
+	'UNVOTE_URL': 'http://localhost/forum/index.php/Answer/unupvote/',
+	'USER_DETAILS_URL': 'http://localhost/forum/index.php/User/getU/',
+	'GET_USER_ANSWERS_URL': 'http://localhost/forum/index.php/User/getAllAnswers/',
+	'GET_USER_QUESTIONS_URL': 'http://localhost/forum/index.php/User/getAllQuestions/'
 };
 
 },{}],252:[function(require,module,exports){
@@ -28069,6 +28176,21 @@ module.exports = {
 
 		return new Promise(work);
 	},
+	"unvote": function unvote(answerId, user_id) {
+		var url = _AppConstants2.default.UNVOTE_URL;
+		var params = "answer_id=" + answerId + "&user_id=" + user_id;
+		var self = this;
+
+		function work(resolve, reject) {
+			return self.get_data(url, params, 'post', true).then(function (response) {
+				console.log(response);
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+	},
 	"answer": function answer(questionId, user_id, _answer) {
 		var params = "question_id=" + questionId + "&user_id=" + user_id + "&answer=" + _answer;
 
@@ -28092,6 +28214,47 @@ module.exports = {
 		if (!results) return null;
 		if (!results[2]) return '';
 		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	},
+	"userDetails": function userDetails(user_id) {
+
+		var url = _AppConstants2.default.USER_DETAILS_URL + user_id;
+		var self = this;
+		console.log('user lsfa ', url);
+
+		function work(resolve, reject) {
+			self.get_data(url, null, 'get', false).then(function (response) {
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+	},
+	"get_user_answers": function get_user_answers($user_id) {
+		var url = _AppConstants2.default.GET_USER_ANSWERS_URL + $user_id;
+		var self = this;
+
+		function work(resolve, reject) {
+			self.get_data(url, null, 'get', false).then(function (response) {
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+	},
+	"get_user_questions": function get_user_questions($user_id) {
+		var url = _AppConstants2.default.GET_USER_QUESTIONS_URL + $user_id;
+		var self = this;
+
+		function work(resolve, reject) {
+			self.get_data(url, null, 'get', false).then(function (response) {
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
 	}
 
 };

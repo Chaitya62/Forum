@@ -9,13 +9,15 @@ export default class Answer extends React.Component {
 
   render() {
     return (
-      <div>
+    
       	<tr>
-            <td>
-               <span className="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
+            <td >
+              {
+                this.props.answer.answer
+              }
             </td>
         </tr>
-      </div>
+      
     );
   }
 }

@@ -18,6 +18,9 @@ class AnswerModel extends CJ_Model{
 	function get_answers_count($question_id){
 		return count($this->read('answers',array('*'),array('question_id'=>$question_id)));
 	}
+	function get_answers_count_by_user($user_id){
+		return count($this->read('answers',array('*'),array('user_id'=>$user_id)));
+	}
 	function add_answer($data){
 		$this->create('answers',$data);
 	}

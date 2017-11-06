@@ -20,4 +20,8 @@ export default  {
 	'UPVOTE_URL': 'http://localhost/forum/index.php/Answer/upvote/',
 	'GET_FEEDS_URL': 'http://localhost/forum/index.php/feeds/get',
 	'ANSWER_URL': 'http://localhost/forum/index.php/Answer/add',
+	'UNVOTE_URL': 'http://localhost/forum/index.php/Answer/unupvote/',
+	'USER_DETAILS_URL': 'http://localhost/forum/index.php/User/getU/',
+	'GET_USER_ANSWERS_URL': 'http://localhost/forum/index.php/User/getAllAnswers/',
+	'GET_USER_QUESTIONS_URL': 'http://localhost/forum/index.php/User/getAllQuestions/'
 }

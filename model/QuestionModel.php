@@ -13,6 +13,11 @@ class QuestionModel extends CJ_Model{
 	function get_by_question_id($id){
 		return $this->read('questions', array('*'), array('id'=>$id));
 	}
+
+	function get_question_count_by_user($user_id){
+		return count($this->read('questions', array('*'), array('user_id'=>$user_id)));
+	}
+
 	function add_question($data){
 		$this->create('questions',$data);
 	}

@@ -110,6 +110,25 @@ class Signup extends Component{
 			return true;
 		}
 
+		function ValidateEmail(email){  
+		var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
+			if(email.match(mailformat))  {  
+				return true;  
+			}  
+			else {   
+			return false;  
+			}  
+		}  
+
+
+		var pattern = /[a-zA-Z_0-9]+@[a-zA-Z_0-9]+\.[a-zA-Z]+/;
+
+		if(!ValidateEmail(email.value)){
+			message = "email format is incorrect";
+			this.setState({'message': message});
+			return true;
+		}
+
 		var self = this;
 		AppAPI.createUser(username, password, email).then((data)=>{
 			var success = data.success;

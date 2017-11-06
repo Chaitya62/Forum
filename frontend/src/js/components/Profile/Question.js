@@ -7,11 +7,12 @@ export default class Question extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       
       	<tr>
             <td>
-               <span className="float-right font-weight-bold">9/4</span> Maxamillion ais the fix for tibulum tincidunt ullamcorper eros. 
+               {this.props.question.question_header} 
             </td>
         </tr>
     

@@ -4,6 +4,7 @@ import AppStore from '../../stores/AppStore';
 import Answers from './Answers';
 import AppAPI from '../../utils/appAPI';
 import Loader from '../Loader';
+import {NavLink} from 'react-router-dom';
 
 
 
@@ -32,6 +33,7 @@ class Question extends Component{
 		var question = questionData.question_header;
 		var qDescription = questionData.description;
 		var username = questionData.user;
+		var profileLink = "/profile?user="+questionData.user_id;
 
 		return(
 			<div className="container-fluid">
@@ -40,7 +42,7 @@ class Question extends Component{
 					  <div className="card-block">
 					    <h4 className="card-title strong">{question}</h4>
 					    <h6 className="card-subtitle mb-2 text-muted">
-					    	asked by {username}
+					    	asked by <NavLink to={profileLink}> {username}</NavLink>
 					    </h6>
 					    <p className="card-text">{qDescription}</p>
 					    <a href="#" className="card-link"></a>

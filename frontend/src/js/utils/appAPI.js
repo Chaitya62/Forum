@@ -3,6 +3,7 @@ var AppActions = require('../actions/AppActions');
 
 
 
+
 module.exports = {
 
 
@@ -186,6 +187,22 @@ module.exports = {
 
 		return new Promise(work);
 	},
+	"unvote":function(answerId, user_id){
+		var url = AppConstants.UNVOTE_URL;
+		var params = "answer_id="+answerId+"&user_id="+user_id;
+		var self = this;
+
+		function work(resolve, reject){
+			return self.get_data(url, params, 'post', true).then((response)=>{
+				console.log(response);
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		} 
+
+		return new Promise(work);
+
+	},
 	"answer": function(questionId, user_id, answer){
 		var params = "question_id="+questionId+"&user_id="+user_id+"&answer="+answer;
 	
@@ -211,6 +228,50 @@ module.exports = {
     if (!results) return null;
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
+	},
+	"userDetails": function(user_id){
+
+		var url = AppConstants.USER_DETAILS_URL + user_id;
+		var self = this;
+		console.log('user lsfa ', url);
+
+		function work(resolve, reject){
+			self.get_data(url, null, 'get', false).then((response)=>{
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+	},
+	"get_user_answers":function($user_id){
+		var url = AppConstants.GET_USER_ANSWERS_URL + $user_id;
+		var self = this;
+
+		function work(resolve, reject){
+			self.get_data(url, null, 'get', false).then((response)=>{
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		
+		return new Promise(work);
+
+	},
+	"get_user_questions":function($user_id){
+		var url = AppConstants.GET_USER_QUESTIONS_URL + $user_id;
+		var self = this;
+
+		function work(resolve, reject){
+			self.get_data(url, null, 'get', false).then((response)=>{
+				var data = JSON.parse(response);
+				resolve(data);
+			}).catch(reject);
+		}
+
+		return new Promise(work);
+
 	}
 
 }
