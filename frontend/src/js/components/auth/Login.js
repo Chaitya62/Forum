@@ -32,7 +32,7 @@ class Login extends Component{
 				<center className="">
 
 					<form className="form col-xs-12 col-sm-12 col-md-12 col-lg-4">
-						<h3 className="text-center">Login</h3>
+						<h3 className="text-center lead bold mb-4"><strong>Sawaal</strong></h3>
 						<div className="form-group">
 							<input className="form-control" ref="username" type = "text" name = "username" placeholder = "Enter Username" />	
 						</div>
