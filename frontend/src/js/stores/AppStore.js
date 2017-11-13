@@ -103,6 +103,8 @@ AppDispatcher.register((payload)=>{
 
 		case AppConstants.RELOAD:
 			AppStore.change('test', 'changed');
+			
+			break;
 		/*
 	
 		Handle all the actions here
