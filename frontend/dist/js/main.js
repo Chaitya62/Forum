@@ -1376,7 +1376,7 @@ module.exports = camelizeStyleName;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 var isTextNode = require('./isTextNode');
@@ -1631,7 +1631,7 @@ module.exports = createNodesFromMarkup;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 function makeEmptyFunction(arg) {
@@ -2072,7 +2072,7 @@ module.exports = isTextNode;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  * @typechecks static-only
  */
 
@@ -2160,7 +2160,7 @@ module.exports = performanceNow;
  * of patent rights can be found in the PATENTS file in the same directory.
  *
  * @typechecks
- * 
+ *
  */
 
 /*eslint-disable no-self-compare */
@@ -2308,7 +2308,7 @@ module.exports.Dispatcher = require('./lib/Dispatcher');
  * of patent rights can be found in the PATENTS file in the same directory.
  *
  * @providesModule Dispatcher
- * 
+ *
  * @preventMunge
  */
 
@@ -6087,7 +6087,7 @@ module.exports = CSSPropertyOperations;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -7782,7 +7782,7 @@ module.exports = EventPluginHub;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -8731,7 +8731,7 @@ module.exports = HTMLDOMPropertyConfig;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -8931,7 +8931,7 @@ module.exports = LinkedValueUtils;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -9552,7 +9552,7 @@ module.exports = ReactComponentBrowserEnvironment;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -13532,7 +13532,7 @@ module.exports = ReactDOMUnknownPropertyHook;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -14048,7 +14048,7 @@ module.exports = {
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -14099,7 +14099,7 @@ module.exports = ReactEmptyComponent;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -14363,7 +14363,7 @@ module.exports = ReactEventListener;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -14455,7 +14455,7 @@ module.exports = ReactHostComponent;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -14693,7 +14693,7 @@ module.exports = ReactInstanceMap;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -14719,7 +14719,7 @@ module.exports = { debugTool: debugTool };
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -15796,7 +15796,7 @@ module.exports = ReactMultiChild;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -15838,7 +15838,7 @@ module.exports = ReactNodeTypes;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -15933,7 +15933,7 @@ module.exports = ReactOwner;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -15959,7 +15959,7 @@ module.exports = ReactPropTypeLocationNames;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -16324,7 +16324,7 @@ module.exports = ReactReconciler;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -16506,7 +16506,7 @@ module.exports = ReactServerRenderingTransaction;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -17640,7 +17640,7 @@ module.exports = SelectEventPlugin;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -18708,7 +18708,7 @@ module.exports = SyntheticWheelEvent;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -18963,7 +18963,7 @@ module.exports = ViewportMetrics;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -19022,7 +19022,7 @@ module.exports = accumulateInto;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -19453,7 +19453,7 @@ module.exports = findDOMNode;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -19530,7 +19530,7 @@ module.exports = flattenChildren;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -19831,7 +19831,7 @@ module.exports = getHostComponentFromComposite;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -20394,7 +20394,7 @@ module.exports = isEventSupported;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -20471,7 +20471,7 @@ module.exports = quoteAttributeValueForBrowser;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 'use strict';
 
@@ -23216,7 +23216,7 @@ module.exports = ReactChildren;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -23596,7 +23596,7 @@ module.exports = ReactComponentTreeHook;
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -24521,7 +24521,7 @@ arguments[4][126][0].apply(exports,arguments)
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -24662,7 +24662,7 @@ arguments[4][159][0].apply(exports,arguments)
  * LICENSE file in the root directory of this source tree. An additional grant
  * of patent rights can be found in the PATENTS file in the same directory.
  *
- * 
+ *
  */
 
 'use strict';
@@ -27874,18 +27874,18 @@ exports.default = {
 	'RELOAD': 'RELOAD',
 
 	// urls
-	LOGIN_URL: 'http://localhost/forum/index.php/User/login',
-	'SIGNUP_URL': 'http://localhost/forum/index.php/User/register',
-	'ASK_URL': 'http://localhost/forum/index.php/Question/add',
-	'GET_QUESTION_URL': 'http://localhost/forum/index.php/Question/get/',
-	'GET_ANSWERS_URL': 'http://localhost/forum/index.php/Answer/get/',
-	'UPVOTE_URL': 'http://localhost/forum/index.php/Answer/upvote/',
-	'GET_FEEDS_URL': 'http://localhost/forum/index.php/feeds/get',
-	'ANSWER_URL': 'http://localhost/forum/index.php/Answer/add',
-	'UNVOTE_URL': 'http://localhost/forum/index.php/Answer/unupvote/',
-	'USER_DETAILS_URL': 'http://localhost/forum/index.php/User/getU/',
-	'GET_USER_ANSWERS_URL': 'http://localhost/forum/index.php/User/getAllAnswers/',
-	'GET_USER_QUESTIONS_URL': 'http://localhost/forum/index.php/User/getAllQuestions/'
+	LOGIN_URL: 'https://testemailkjsce.000webhostapp.com/forum/index.php/User/login',
+	'SIGNUP_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/User/register',
+	'ASK_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/Question/add',
+	'GET_QUESTION_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/Question/get/',
+	'GET_ANSWERS_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/Answer/get/',
+	'UPVOTE_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/Answer/upvote/',
+	'GET_FEEDS_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/feeds/get',
+	'ANSWER_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/Answer/add',
+	'UNVOTE_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/Answer/unupvote/',
+	'USER_DETAILS_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/User/getU/',
+	'GET_USER_ANSWERS_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/User/getAllAnswers/',
+	'GET_USER_QUESTIONS_URL': 'https://testemailkjsce.000webhostapp.com/forum/index.php/User/getAllQuestions/'
 };
 
 },{}],253:[function(require,module,exports){
@@ -28159,7 +28159,7 @@ module.exports = {
 			resolve(value);
 		}
 		return new Promise(work);
-		//will have to parse if not string 
+		//will have to parse if not string
 	},
 	"destroy_cache": function destroy_cache() {
 		localStorage.removeItem(_AppConstants2.default.STORE);
